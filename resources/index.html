@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ASTRAI Resource Hub</title>
-  <meta name="description" content="ASTRAI Resource Hub: datasets, source code, publications, and citation/licensing." />
+  <title>ESPAI Resource Hub</title>
+
+  <meta name="description" content="ESPAI Resource Hub: datasets, source code, publications, and citation/licensing." />
   <link rel="stylesheet" href="../assets/css/main.css">
 </head>
 <body class="with-fixed-header resources-page">
@@ -12,7 +13,7 @@
     <header>
       <div class="container">
         <div class="header-content">
-          <a class="logo" href="/">ASTRAI</a>
+          <a class="logo" href="/">ESPAI</a>
           <nav aria-label="Primary">
             <a href="/#about">About</a>
             <a href="/#project">Project</a>
@@ -26,9 +27,9 @@
 
 
   <main class="container resources-page">
-    <h1>ASTRAI Resource Hub</h1>
+    <h1>ESPAI Resource Hub</h1>
     <p class="lede">
-      Welcome to the ASTRAI Resource Hub. Here you’ll find <strong>datasets</strong> (physical models, real observations, and GenAI simulations),
+      Welcome to the ESPAI Resource Hub. Here you’ll find <strong>datasets</strong> (Anomaly Detection System, real observations, and GenAI simulations),
       <strong>source code</strong>, and <strong>publications</strong> produced by the project. Each release aims to be <em>FAIR</em>—findable,
       accessible, interoperable, and reusable—so you can reproduce results, benchmark your own methods, and build on this work responsibly.
     </p>
@@ -66,7 +67,7 @@
         </li>
         <li><a href="#code">Source Code</a>
           <ul>
-            <li><a href="#code-core">ASTRAI Core Repository</a></li>
+            <li><a href="#code-core">ESPAI Core Repository</a></li>
           </ul>
         </li>
         <li><a href="#publications">Publications</a>
@@ -92,7 +93,7 @@
     <section id="datasets" aria-labelledby="datasets-heading">
       <h2 id="datasets-heading">Datasets</h2>
         <p>
-          ASTRAI datasets are grouped into three categories: <strong>Physical Simulations</strong> (A),
+          ESPAI datasets are grouped into three categories: <strong>Physical Simulations</strong> (A),
           <strong>Real Supernova Observations</strong> (B), and <strong>GenAI Simulator</strong> (C).
           Each dataset comes with a minimal <em>open sample</em> (CSV, 5 rows) for quick inspection and the full files in compact formats (e.g. <code>.parquet</code>) for research use.
           FAIR artefacts (metadata, README, provenance, dictionary, and citation) are being added incrementally and are clearly marked below.
@@ -372,7 +373,7 @@
 
         <article id="C1" class="dataset frame" aria-labelledby="C1-heading">
           <h4 id="C1-heading">C1. Synthetic GenAI data</h4>
-            <p><strong>Overview.</strong> Synthetic light curves produced by the ASTRAI GenAI model to augment coverage where observations are sparse.
+            <p><strong>Overview.</strong> Synthetic light curves produced by the ESPAI GenAI model to augment coverage where observations are sparse.
             Paired <code>.parquet</code> files provide light time series; releases will ship with transparent generation settings.</p>
             <p class="muted">Intended use: data augmentation, controlled experiments on cadence/noise, and benchmarking generalisation.</p>
 
@@ -460,7 +461,7 @@
       <article class="repo" data-status="wip" aria-labelledby="code-core-heading">
       <!-- Allowed values for data-status: private, public, wip, frozen, archived -->
         <div class="repo-head">
-          <h3 id="code-core-heading" class="repo-title">ASTRAI Core Repository</h3>
+          <h3 id="code-core-heading" class="repo-title">ESPAI Core Repository</h3>
           <span class="repo-state" aria-live="polite"></span>
         </div>
 
@@ -477,8 +478,8 @@
           <a class="btn btn-secondary" href="#" aria-disabled="true">Download ZIP</a>
           -->
           <!-- with links, just placeholder -->
-            <a class="btn" href="https://github.com/koexai/ASTRAI.git" target="_blank" rel="noopener">View on GitHub</a>
-            <a class="btn btn-secondary" href="https://github.com/koexai/ASTRAI/archive/refs/heads/main.zip">Download ZIP</a>
+            <a class="btn" href="https://github.com/koexai/ESPAI.git" target="_blank" rel="noopener">View on GitHub</a>
+            <a class="btn btn-secondary" href="https://github.com/koexai/ESPAI/archive/refs/heads/main.zip">Download ZIP</a>
         </p>
 
         <!-- Once the repo is public you can: (1) remove this section (2) convert it to a Contents summary, with links to real folders/files in Github-->
@@ -630,7 +631,7 @@
     <section id="licence-citation" aria-labelledby="licence-heading">
       <h2 id="licence-heading">Licence &amp; Citation</h2>
         <p>
-          To support ethical reuse and proper attribution, ASTRAI provides default licensing and citation templates for datasets and software.
+          To support ethical reuse and proper attribution, ESPAI provides default licensing and citation templates for datasets and software.
           <strong>Important:</strong> if a dataset or repository includes its own <code>LICENSE</code>, <code>citation.txt</code>, or DOI,
           that local file <em>overrides the defaults</em> below. Always prefer the per-item files when present.
         </p>
@@ -649,16 +650,16 @@
         </p>
 
         <h4>Recommended dataset citation (plain text)</h4>
-        <pre class="cite">ASTRAI Project (2025). ASTRAI Light Curves — Physical models (4-parameters), v0.1.
-Koexai. URL: https://astrai.koexai.com/resources/  Licence: CC BY 4.0.</pre>
+        <pre class="cite">ESPAI Project (2025). ESPAI Light Curves — Physical models (4-parameters), v0.1.
+Koexai. URL: https://ESPAI.koexai.com/resources/  Licence: CC BY 4.0.</pre>
 
         <h4>Dataset BibTeX (template)</h4>
-        <pre class="cite">@dataset{astrai_A1_v0_1_2025,
-      author  = {ASTRAI Project},
-      title   = {ASTRAI Light Curves — Physical models (4-parameters)},
+        <pre class="cite">@dataset{ESPAI_A1_v0_1_2025,
+      author  = {ESPAI Project},
+      title   = {ESPAI Light Curves — Physical models (4-parameters)},
       year    = {2025},
       version = {0.1},
-      url     = {https://astrai.koexai.com/resources/},
+      url     = {https://ESPAI.koexai.com/resources/},
       license = {CC BY 4.0},
       note    = {Replace with DOI when available}
     }</pre>
@@ -674,16 +675,16 @@ Koexai. URL: https://astrai.koexai.com/resources/  Licence: CC BY 4.0.</pre>
         </p>
 
         <h4>Recommended software citation (plain text)</h4>
-        <pre class="cite">ASTRAI Project (2025). ASTRAI Core (v0.1) — Generative models and characterisation tools.
-Source code. URL: https://astrai.koexai.com/resources/  Licence: MIT.</pre>
+        <pre class="cite">ESPAI Project (2025). ESPAI Core (v0.1) — Generative models and characterisation tools.
+Source code. URL: https://ESPAI.koexai.com/resources/  Licence: MIT.</pre>
 
         <h4>Software BibTeX (template)</h4>
-        <pre class="cite">@software{astrai_core_v0_1_2025,
-      author  = {ASTRAI Project},
-      title   = {ASTRAI Core},
+        <pre class="cite">@software{ESPAI_core_v0_1_2025,
+      author  = {ESPAI Project},
+      title   = {ESPAI Core},
       year    = {2025},
       version = {0.1},
-      url     = {https://astrai.koexai.com/resources/},
+      url     = {https://ESPAI.koexai.com/resources/},
       license = {MIT},
       note    = {Replace with repository URL and tag when public}
     }</pre>

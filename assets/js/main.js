@@ -454,6 +454,7 @@ window.addEventListener('DOMContentLoaded', function () {
     }
 
     // === Align the TOC panel with the first content heading (desktop only) ===
+    /* COMMENTATO - La TOC deve rimanere in alto
     if (document.body.classList.contains('resources-page')) {
       (function alignTocToFirstHeading() {
         const mq   = window.matchMedia('(max-width: 980px)'); // keep in sync with CSS
@@ -486,6 +487,7 @@ window.addEventListener('DOMContentLoaded', function () {
         apply();
       })();
     }
+    */
 
     /* ========= FAIR checklist: dynamic chip text from data-status (A11Y-friendly) ========= */
     (function () {
@@ -689,7 +691,7 @@ window.addEventListener('DOMContentLoaded', function () {
       el.outerHTML = `
         <footer class="site-footer">
           <div class="container">
-            <p>© 2025 ASTRAI — Site by <a href="https://koexai.com" rel="external">Koexai srl</a></p>
+            <p>© 2025 GRAIS — Site by <a href="https://koexai.com" rel="external">Koexai srl</a></p>
           </div>
         </footer>`;
     }
