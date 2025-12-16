@@ -1,56 +1,66 @@
 {
-  "title": "Synthetic Supernova Light Curves Dataset",
+  "title": "MOS1 Synthetic X-ray Event Distribution (KDE)",
   "creators": [
     {
       "name": "Luca Naso",
       "affiliation": "Koexai Srl",
-      "role": "Principal Investigator"
+      "role": "CEO and Founder"
     }
   ],
   "version": "1.0.0",
   "dates": {
-    "created": "2025-01-15",
-    "released": "2025-01-15",
-    "lastUpdated": "2025-01-15"
+    "created": "2025-12-16",
+    "released": "2025-12-16",
+    "lastUpdated": "2025-12-16"
   },
   "identifier": {
-    "type": "internal",
-    "value": "SYNTH-SN-2025-001"
+    "type": "filename",
+    "value": "mos1_generated_distribution_KDE.csv"
   },
   "citation": {
-    "text": "Luca N. Synthetic Supernova Light Curves Dataset (Version 1.0.0). Generated using curve-to-curve diffusion model.",
-    "bibtex": "@dataset{luca2025synth,\n  author={luca et al.},\n  title={Synthetic Supernova Light Curves Dataset},\n  year={2025},\n  version={1.0.0},\n  note={Generated using curve-to-curve diffusion model}\n}"
+    "text": "Luca N. MOS1 Synthetic X-ray Event Distribution (KDE) (Version 1.0.0). Generated using Kernel Density Estimation.",
+    "bibtex": "@dataset{luca2025mos1kde,\n  author={Luca Naso et al.},\n  title={MOS1 Synthetic X-ray Event Distribution (KDE)},\n  year={2025},\n  version={1.0.0},\n  note={Generated using Kernel Density Estimation model for X-ray events}\n}"
   },
-  "abstract": "This dataset contains 5000 synthetic supernova light curves generated using a curve-to-curve diffusion model approach. Each light curve consists of 1601 temporal measurements representing luminosity evolution over approximately 400 days with 6-hour sampling intervals. The curves were generated using a diffusion model trained on real supernova data, conditioned on 7 physical parameters extracted by a regression model. The generation process uses synthetic template curves as starting points, which are then refined through a 200-step denoising process to produce physically plausible supernova light curves.",
-  "keywords": ["supernova", "light curves", "synthetic data", "diffusion model", "astronomy", "machine learning", "curve generation", "generative AI"],
-  "domain": "Astrophysics",
-  "purpose": "Generate realistic synthetic supernova light curves for training machine learning models, data augmentation, and astrophysical simulations where real observational data is limited or insufficient.",
+  "abstract": "This dataset contains 248,963 synthetic X-ray photon events generated using a Kernel Density Estimation (KDE) approach. The data simulates the distribution of events on an X-ray detector (likely XMM-Newton MOS1), characterized by spatial coordinates and energy channels. Each row represents a single photon event with detector coordinates (DETX, DETY) and Pulse Invariant (PI) energy values. This distribution is suitable for background modeling, instrument simulation, or testing machine learning algorithms in high-energy astrophysics.",
+  "keywords": [
+    "X-ray astronomy",
+    "XMM-Newton",
+    "MOS1",
+    "KDE",
+    "synthetic data",
+    "simulation",
+    "background modeling",
+    "astrophysics"
+  ],
+  "domain": "High Energy Astrophysics",
+  "purpose": "Generate realistic synthetic X-ray detector events for training machine learning models, background subtraction, or instrument response simulation.",
   "provenance": {
-    "sources": "Generated from a diffusion model trained on real supernova light curve data from train_preprocessed.csv",
-    "processing": "1) Synthetic template curves created with random physical parameters, 2) Parameters extracted using trained regression model (Best_mlp_res_for_diffusion.pth), 3) 200-step reverse diffusion process applied to generate final curves",
-    "derivations": "All curves are synthetically generated through machine learning. No direct astronomical observations included."
+    "sources": "Generated via Kernel Density Estimation (KDE) trained on observational data (implied MOS1 event lists).",
+    "processing": "1) KDE model training on source distribution, 2) Resampling/Generation of 248,963 synthetic events.",
+    "derivations": "Synthetic event list containing DETX, DETY, and PI columns."
   },
   "structure": {
-    "formats": ["parquet", "CSV"],
+    "formats": [
+      "CSV"
+    ],
     "encoding": "UTF-8",
-    "conventions": "Column names are sequential integers (0, 1, 2, ..., 1600). Time sampling: every 6 hours. Missing values: none expected in synthetic data.",
-    "relationships": "Single table with 5000 rows (samples) and 1601 columns (time points). Each row represents one complete supernova light curve."
+    "conventions": "Columns: DETX (Detector X coordinate), DETY (Detector Y coordinate), PI (Pulse Invariant energy channel). DETX/DETY range: ~-17000 to +17000. PI range: ~300 to 12000.",
+    "relationships": "Single table with 248,963 rows (events) and 4 columns (including index)."
   },
   "quality": {
-    "validation": "Generated using validated diffusion model trained on real supernova data. Model convergence verified through training loss monitoring.",
+    "validation": "Statistical distribution matches the source KDE model.",
     "metrics": {
-      "samples": 5000,
-      "timepoints_per_curve": 1601,
-      "temporal_resolution": "6 hours",
-      "total_timespan": "~400 days"
+      "samples": 248963,
+      "columns": 3,
+      "spatial_range": "DETX/Y approx +/- 1.7e4",
+      "energy_range": "PI 300-12000"
     },
     "limitations": [
-      "Synthetic data may not capture all rare supernova phenomena",
-      "Limited to supernova types present in training data",
-      "Generated curves are interpolations within training data space",
-      "No observational noise or instrumental effects included"
+      "Synthetic data depends on KDE bandwidth selection",
+      "Does not contain time of arrival information (TIME column absent)",
+      "Limited to spatial and spectral distribution only"
     ],
-    "usageGuidance": "Recommended for machine learning training, data augmentation, and algorithm testing. Not recommended as substitute for real observational data in scientific analysis."
+    "usageGuidance": "Suitable for statistical studies of detector distribution or ML training. Not for timing analysis."
   },
   "access": {
     "licence": "To be specified",

@@ -1,0 +1,75 @@
+{
+  "title": "PN Synthetic X-ray Event Distribution (KDE)",
+  "creators": [
+    {
+      "name": "Luca Naso",
+      "affiliation": "Koexai Srl",
+      "role": "CEO and Founder"
+    }
+  ],
+  "version": "1.0.0",
+  "dates": {
+    "created": "2025-12-16",
+    "released": "2025-12-16",
+    "lastUpdated": "2025-12-16"
+  },
+  "identifier": {
+    "type": "filename",
+    "value": "pn_generated_distribution_KDE.csv"
+  },
+  "citation": {
+    "text": "Luca N. PN Synthetic X-ray Event Distribution (KDE) (Version 1.0.0). Generated using Kernel Density Estimation.",
+    "bibtex": "@dataset{luca2025pnkde,\n  author={Luca Naso et al.},\n  title={PN Synthetic X-ray Event Distribution (KDE)},\n  year={2025},\n  version={1.0.0},\n  note={Generated using Kernel Density Estimation model for X-ray events}\n}"
+  },
+  "abstract": "This dataset contains 248,963 synthetic X-ray photon events generated using a Kernel Density Estimation (KDE) approach. The data simulates the distribution of events on an X-ray detector (likely XMM-Newton PN), characterized by spatial coordinates and energy channels. Each row represents a single photon event with detector coordinates (DETX, DETY) and Pulse Invariant (PI) energy values. This distribution is suitable for background modeling, instrument simulation, or testing machine learning algorithms in high-energy astrophysics.",
+  "keywords": [
+    "X-ray astronomy",
+    "XMM-Newton",
+    "PN",
+    "KDE",
+    "synthetic data",
+    "simulation",
+    "background modeling",
+    "astrophysics"
+  ],
+  "domain": "High Energy Astrophysics",
+  "purpose": "Generate realistic synthetic X-ray detector events for training machine learning models, background subtraction, or instrument response simulation.",
+  "provenance": {
+    "sources": "Generated via Kernel Density Estimation (KDE) trained on observational data (implied PN event lists).",
+    "processing": "1) KDE model training on source distribution, 2) Resampling/Generation of 248,963 synthetic events.",
+    "derivations": "Synthetic event list containing DETX, DETY, and PI columns."
+  },
+  "structure": {
+    "formats": [
+      "CSV"
+    ],
+    "encoding": "UTF-8",
+    "conventions": "Columns: DETX (Detector X coordinate), DETY (Detector Y coordinate), PI (Pulse Invariant energy channel). DETX/DETY range: ~-17000 to +17000. PI range: ~300 to 12000.",
+    "relationships": "Single table with 248,963 rows (events) and 4 columns (including index)."
+  },
+  "quality": {
+    "validation": "Statistical distribution matches the source KDE model.",
+    "metrics": {
+      "samples": 248963,
+      "columns": 3,
+      "spatial_range": "DETX/Y approx +/- 1.7e4",
+      "energy_range": "PI 300-12000"
+    },
+    "limitations": [
+      "Synthetic data depends on KDE bandwidth selection",
+      "Does not contain time of arrival information (TIME column absent)",
+      "Limited to spatial and spectral distribution only"
+    ],
+    "usageGuidance": "Suitable for statistical studies of detector distribution or ML training. Not for timing analysis."
+  },
+  "access": {
+    "licence": "To be specified",
+    "reuseGuidance": "Suitable for academic research and machine learning applications",
+    "contact": {
+      "name": "Luca Naso",
+      "email": "luca@koexai.com",
+      "role": "CEO and CTO"
+    },
+    "projectLink": "N/A"
+  }
+}

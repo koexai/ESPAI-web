@@ -1,213 +1,82 @@
-# Provenance and Methods: Synthetic Supernova Light Curves Dataset
+# Provenance and Methods: Synthetic X-ray Telescope Event Dataset (ESPAI)
 
 ## Overview
 
-This document provides a comprehensive description of how the synthetic supernova light curves dataset was generated. The methodology combines regression-based parameter extraction with a novel curve-to-curve diffusion approach to produce physically plausible synthetic supernova observations.
+This document provides a comprehensive description of how the synthetic X-ray telescope event dataset was generated within the ESPAI project (Enhancing Signal Purity with Artificial Intelligence in X-band telescopes)[cite: 5]. While the project explored various architectures, the final dataset described here was produced using a **Kernel Density Estimator (KDE)** model[cite: 116]. The goal is to generate a balanced dataset of instrumental background signals and transient phenomena (such as Solar Flares) to support astronomical research[cite: 25].
 
 ## Data Sources and Acquisition
 
 ### Primary Training Data
 
-**Source**: `train_preprocessed.csv` and `validation_preprocessed.csv`
-- **Content**: Real supernova light curve observations with associated physical parameters
-- **Structure**: 1601 temporal points + 7 physical parameters per supernova
-- **Temporal sampling**: 6-hour intervals over ~400 days
-- **Parameters**: raggio, massa, energia, nichel, Mcsm, rcsm, slope
+**Source**: Observations from **XMM-Newton** (detectors MOS1, MOS2, PN)[cite: 73].
+- **Content**: Real X-ray events specifically filtered to isolate high-energy instrumental background and solar flares[cite: 74].
+- **Structure**: Point clouds where each event represents a single photon defined by spatial coordinates and energy[cite: 46].
+- **Features**: 3-dimensional data points: `x = [DETX, DETY, PI]`[cite: 66].
+  - **DETX, DETY**: Spatial coordinates on the detector[cite: 45].
+  - **PI**: Pulse Invariant (Energy)[cite: 45].
+- **Temporal sampling**: The methodology treats photons as independent instances (triples of DETX, DETY, PI); the temporal occurrence is considered decoupled from physical properties for this generation task[cite: 46, 47].
 
 **Data Preprocessing**: 
-- Features normalized for regression model input
-- Targets (parameters) kept in original scale
-- No missing value imputation required (preprocessed data)
-
-### Pre-trained Models
-
-**Regression Model**: `Best_mlp_res_for_diffusion.pth`
-- **Architecture**: Compound model with 7 separate MLPs
-- **Input**: 1601-point light curves (normalized)
-- **Output**: 7 physical parameters
-- **Training**: Supervised learning on real supernova data
-- **Purpose**: Extract physical parameters from light curves
-
-**Diffusion Model**: `best_curve_to_curve_diffusion.pth`
-- **Architecture**: UNet with parameter conditioning
-- **Training approach**: Curve-to-curve translation with physical parameter conditioning
-- **Timesteps**: 200 denoising steps
-- **Input**: Noisy curves + 7 physical parameters
-- **Output**: Refined light curves
+- **Filtering**:
+  - Removal of instrumental noise and events outside the Field of View (FOV)[cite: 98].
+  - **Energy Threshold**: `PI > 300` (approx. 300 eV) to isolate high-energy non-cosmic components typical of flares/background[cite: 98, 99].
+  - **Quality Flags**: Usage of `FLAG` and `PATTERN` filters to select events of good instrumental quality[cite: 99, 102].
+- **Normalization**: 
+  - Features (DETX, DETY, PI) are standardized using **Scikit-Learn's StandardScaler**[cite: 111].
+  - This ensures uniformity and compatibility with machine learning input ranges[cite: 113, 114].
 
 ## Generation Pipeline
 
-### Step 1: Synthetic Template Creation
+### Model Architecture: Kernel Density Estimator (KDE)
 
-Templates are created using the `synthetic` strategy in `create_template_curves_for_inference()`:
+The synthetic dataset was generated using a **Kernel Density Estimator (KDE)** implemented via `scikit-learn`, serving as a robust probabilistic approach[cite: 116].
 
-**Mathematical Model**:
-```python
-# Rise phase (exponential growth)
-rise_part = peak_intensity * (1 - exp(-t / rise_time))
+**Methodology**:
+- **Core Concept**: The model estimates the non-parametric probability density function of the real dataset ($X$) by summing kernel functions centered on each data point[cite: 117].
+- **Sampling**: New synthetic data points ($\hat{x}$) are sampled from this estimated distribution, reflecting the statistical properties of the original input[cite: 117].
 
-# Decay phase (exponential decay)  
-decay_part = peak_intensity * exp(-(t - peak_time) / decay_time)
-```
-
-**Randomized Parameters**:
-- `peak_time`: Uniform random in [200, 800] temporal points
-- `peak_intensity`: Uniform random in [0.5, 2.0]
-- `rise_time`: Uniform random in [50, 200] points
-- `decay_time`: Uniform random in [300, 800] points
-
-**Additional Variability**:
-- Gaussian noise (σ = 0.1) added to base template
-- Amplitude scaling: Normal(1.0, 0.15) clipped to [0.7, 1.3]
-- Smooth calibration errors: Cumulative sum of Normal(0, 0.015)
-
-### Step 2: Parameter Extraction
-
-For each synthetic template:
-
-1. **Normalization**: Apply same normalization used during regression training
-2. **Parameter prediction**: Pass through trained regression model
-3. **Output**: 7-dimensional parameter vector per template
-
-**Regression Model Architecture**:
-```
-CompoundModel:
-  ├── MLP_1: 1601 → 1024 → 1 (raggio)
-  ├── MLP_2: 1601 → 1024 → 1 (massa)
-  ├── MLP_3: 1601 → 1024 → 1 (energia)
-  ├── MLP_4: 1601 → 1024 → 1 (nichel)
-  ├── MLP_5: 1601 → 1024 → 1 (Mcsm)
-  ├── MLP_6: 1601 → 1024 → 1 (rcsm)
-  └── MLP_7: 1601 → 1024 → 1 (slope)
-```
-
-Each MLP uses:
-- 7 residual blocks with LeakyReLU activation
-- BatchNorm1d normalization  
-- Dropout (p=0.4) during training
-- Depth: 7 layers per parameter
-
-### Step 3: Parameter Modification
-
-To increase diversity:
-```python
-param_noise = torch.randn_like(template_params) * 0.1
-modified_params = template_params + param_noise
-```
-
-This ensures generated curves don't exactly match template parameters, creating variability while maintaining physical consistency.
-
-### Step 4: Diffusion-Based Refinement
-
-**Reverse Diffusion Process**:
-
-1. **Initialization**: 
-   ```python
-   x = input_curves + torch.randn_like(input_curves) * 0.3
-   ```
-
-2. **Iterative Denoising** (200 steps):
-   ```python
-   for t_step in reversed(range(200)):
-       combined_input = x + 0.1 * template_curves  # Template guidance
-       x = diffusion.p_sample(combined_input, t, modified_params)
-   ```
-
-3. **Template Influence**: 10% weighted combination maintains connection to original template while allowing significant refinement
-
-**UNet Architecture Details**:
-- **Input channels**: 1 (light curve)
-- **Conditioning**: 7 physical parameters injected at multiple levels
-- **Time embedding**: Sinusoidal positional encoding (128D → 256D)
-- **Parameter embedding**: 7D → 64D → 128D → 256D
-- **Encoder**: 3 downsampling layers with GroupNorm + SiLU
-- **Decoder**: 3 upsampling layers with skip connections
-- **Output**: Predicted noise for current denoising step
+**Key Hyperparameters**:
+- **Bandwidth**: Set to **0.001**[cite: 120].
+  - **Rationale**: This extremely small value was selected to represent the intrinsic structural error of the sensor[cite: 121].
+  - **Effect**: Unlike larger bandwidths that might smooth the distribution, this specific value forces the model to generate a distribution that remains extremely close to the true multi-dimensional data, ensuring the synthetic samples are statistically indistinguishable from the real ones[cite: 121, 122].
 
 ## Quality Assurance
 
-### Model Validation
-
-**Diffusion Training**:
-- **Loss function**: MSE between predicted and true noise
-- **Validation monitoring**: Loss tracked on separate validation set  
-- **Early stopping**: Best model saved based on validation loss
-- **Gradient clipping**: Max norm = 0.5 to prevent instability
-
-**Parameter Consistency**:
-- Generated curves maintain relationship to conditioning parameters
-- Parameter ranges stay within physically reasonable bounds
-- No systematic bias observed in parameter distribution
-
 ### Statistical Validation
 
-**Temporal Structure**:
-- All curves exhibit proper supernova-like evolution (rise + decay)
-- Peak timing varies appropriately with physical parameters
-- Decay rates consistent with underlying physics
+The quality of the KDE-generated dataset was validated using the **Kolmogorov-Smirnov (KS)** test, comparing the synthetic distributions against the real data[cite: 200].
 
-**Diversity Assessment**:
-- Generated curves span wide range of morphologies
-- No obvious mode collapse or repetitive patterns
-- Parameter space coverage verified through sampling
+**Results (Baseline KDE Model)**[cite: 199]:
+- **DETX**: KS Stat `0.0009` | P-value `0.9719`
+- **DETY**: KS Stat `0.0013` | P-value `0.7361`
+- **PI**: KS Stat `0.0010` | P-value `0.9279`
+
+**Interpretation**:
+- The exceptionally low KS statistics and high P-values ($>0.05$) confirm that the null hypothesis cannot be rejected[cite: 203].
+- This statistically validates that the distributions produced by the KDE model are **indistinguishable** from the reference real data, outperforming other tested architectures like the Autoencoder in terms of pure statistical fidelity[cite: 203, 204].
+
+### Visual and Structural Validation
+
+The validation process included several graphical checks to ensure physical consistency:
+- **Correlation Matrices**: Comparison of feature interdependencies (DETX, DETY, PI) between real and synthetic sets[cite: 214].
+- **Global Energy Distribution**: Verification of spectral shape (linear and log scales) to ensure the model learned the background energy profile[cite: 216].
+- **Spatial Coverage**:
+  - **Radial Histograms**: Comparison of radial distribution ($\sqrt{DETX^2 + DETY^2}$)[cite: 219].
+  - **Spatial Scatter Plots**: 2D overlay of real vs. synthetic events to validate spatial fidelity across the detector surface[cite: 220].
 
 ## Processing Environment
 
-### Software Versions
-- **PyTorch**: 2.0+
-- **Python**: 3.12
-- **NumPy**: Latest stable
-- **Pandas**: Latest stable  
-- **CUDA**: Available for GPU acceleration
+### Computing Resources
+- **Hardware**: Validated and run on the **Leonardo supercomputer**, managed by the CINECA consortium[cite: 193].
 
-### Computational Resources
-- **Training**: GPU-accelerated (CUDA-enabled)
-- **Generation**: Batch processing with 50 samples per batch
-- **Memory**: Sufficient for 5000 × 1601 arrays plus model weights
-
-### Random Seeding
-- No fixed random seed used to maximize diversity
-- Each generation run produces unique synthetic data
-- Reproducibility available through seed specification if needed
+### Software Stack
+- **Library**: `scikit-learn` (specifically for `KernelDensity` and `StandardScaler`)[cite: 116, 111].
 
 ## Limitations and Assumptions
 
-### Model Limitations
-
-1. **Training Data Dependency**: Generated diversity limited by original training data coverage
-2. **Parameter Space**: Cannot extrapolate beyond training parameter ranges  
-3. **Physical Approximations**: Uses learned approximations rather than first-principles physics
-4. **Template Influence**: Synthetic templates may bias certain curve characteristics
-
 ### Methodological Assumptions
+1. **Temporal Independence**: The model assumes that single photon events (DETX, DETY, PI) are independent instances in a 3D point cloud[cite: 46]. The temporal sequence is not modeled explicitly as a time series (e.g., via RNNs) because the physical properties are considered decoupled from the timestamp for this specific simulation goal[cite: 45, 47].
+2. **Bandwidth Sensitivity**: The success of this method relies heavily on the specific bandwidth (0.001). A larger bandwidth would result in an overly smoothed distribution that fails to capture the specific sensor noise characteristics[cite: 120, 121].
 
-1. **Physical Parameter Completeness**: 7 parameters assumed sufficient for supernova characterization
-2. **Temporal Sampling**: 6-hour resolution assumed adequate for supernova evolution
-3. **Noise Model**: Training data noise characteristics assumed representative
-4. **Statistical Independence**: Generated curves treated as independent samples
-
-### Validation Constraints
-
-1. **Ground Truth**: No perfect ground truth for synthetic data quality assessment
-2. **Rare Events**: Limited ability to validate rare supernova phenomena
-3. **Long-term Behavior**: Extrapolation beyond ~400 days not validated
-4. **Systematic Effects**: Potential systematic biases difficult to detect without extensive validation
-
-## Future Improvements
-
-### Potential Enhancements
-
-1. **Physics Integration**: Incorporate more rigorous physical constraints
-2. **Noise Modeling**: Add realistic observational noise and systematic effects
-3. **Extended Parameters**: Include additional physical or observational parameters
-4. **Validation Framework**: Develop comprehensive synthetic data validation metrics
-5. **Active Learning**: Use generated data to improve model training iteratively
-
-### Research Directions
-
-1. **Domain Adaptation**: Adapt to different supernova surveys or instruments
-2. **Multi-wavelength**: Extend to multiple photometric bands
-3. **Spectroscopic**: Generate corresponding spectral evolution
-4. **Population Synthesis**: Generate statistically representative supernova populations
-
-
+### Model Limitations
+- **Generalization**: While the KDE model excels at reproducing the training distribution (high fidelity), it acts more as a sophisticated sampler of the existing density rather than learning a compressed latent representation for feature abstraction (unlike the Autoencoder approach discussed in the broader project)[cite: 117, 137].
