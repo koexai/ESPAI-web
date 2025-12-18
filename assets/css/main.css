@@ -922,3 +922,30 @@ body.resources-page .toc-panel { margin-top: 0; }
   .footer-row { flex-direction:row; justify-content:space-between; }
   .legal { text-align:right; }
 }
+
+/* image setting*/
+.image-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.image-item {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.image-item a {
+  display: block;
+  max-width: 100%;
+}
+
+.image-item img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}

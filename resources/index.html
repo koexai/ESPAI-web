@@ -29,12 +29,12 @@
   <main class="container resources-page">
     <h1>ESPAI Resource Hub</h1>
     <p class="lede">
-      Welcome to the ESPAI Resource Hub. Here you’ll find <strong>datasets</strong> (Anomaly Detection System, real observations, and GenAI simulations),
-      <strong>source code</strong>, and <strong>publications</strong> produced by the project. Each release aims to be <em>FAIR</em>—findable,
-      accessible, interoperable, and reusable—so you can reproduce results, benchmark your own methods, and build on this work responsibly.
+      Welcome to the ESPAI Resource Hub. Here you’ll find <strong>datasets</strong>, <strong>plots</strong>, <strong>source code</strong> and <strong>documentation</strong> 
+      produced by the project. Resources include training and validation metrics, inference visualisations, and synthetic datasets generated with ESPAI GenAI model, alongside the core software used to produce them. 
+      Each release aims to be <em>FAIR</em>—findable, accessible, interoperable, and reusable—so you can reproduce results, benchmark your own methods, and build on this work responsibly.
     </p>
     <p class="muted">
-      <strong>At a glance:</strong> browse the index on the left, open any dataset section for a short overview, file checksums, a tiny CSV preview (first 5 rows), and FAIR artefacts.
+      <strong>At a glance:</strong> browse the index on the left, open any dataset section for a short overview, downloadable plots and visual summaries (training, validation, inference), file checksums, a tiny CSV preview (first 5 rows), and FAIR artefacts.
       Status chips like “Available”, “Coming soon”, or “External” indicate exactly where we are in the release process.
     </p>
 
@@ -49,20 +49,21 @@
           <ul>
             <li><a href="#A">A. Training / Validation Metrics</a>
               <ul>
-                <!-- <li><a href="#A1">A1. //PLACEHOLDER// </a></li>
-                <li><a href="#A2">A2. //PLACEHOLDER// </a></li>-->
+                <li><a href="#A1">A1. Training Accuracy for each Detector.</a></li>
+                <li><a href="#A2">A2. Validation Accuracy for each Detector.</a></li>
+                <li><a href="#A3">A3. Validation statistics for each Detector.</a></li>
               </ul>
             </li>
             <li><a href="#B">B. Inference Plots</a>
               <ul>
-                <!-- <li><a href="#B1">B1. //PLACEHOLDER// </a></li> -->
+                <li><a href="#B1">B1. Plot of inference signal comparison for each Detector.</a></li>
               </ul>
             </li>
             <li><a href="#C">C. Synthetic Dataset</a>
               <ul>
                 <li><a href="#C1">C1. Synthetic EPIC-MOS1 Camera Flare events</a></li>
-                <li><a href="#C1">C2. Synthetic EPIC-MOS2 Camera Flare events</a></li>
-                <li><a href="#C1">C3. Synthetic EPIC-PN Camera Flare events</a></li>
+                <li><a href="#C2">C2. Synthetic EPIC-MOS2 Camera Flare events</a></li>
+                <li><a href="#C3">C3. Synthetic EPIC-PN Camera Flare events</a></li>
               </ul>
             <li><a href="#code">Source Code</a>
               <ul>
@@ -94,270 +95,219 @@
 
 
       <!-- Category A -->
-      <section id="A" class="category-band band-a" aria-labelledby="A-heading">
+      <section id="A" class="Showing Plots" aria-labelledby="A-heading">
+        <h3 id="A-heading">A. Training / Validation Metrics</h3>      
+        <article id="A1" class="Training Accuracy" aria-labelledby="A1-heading">
+          <h4 id="A1-heading">A1. Training Accuracy for each Detector.</h4>
+              <p class="muted">
+                Visual summaries of the images. Click an image to download the full-resolution version.
+              </p>
 
-        <h3 id="A-heading">A. Training / Validation Metrics</h3>
+            <div class="image-strip" aria-label="A1 image previews">
 
-      <!--              DA SOSTITUIRE - ALDO - 
-        <article id="A1" class="dataset frame" aria-labelledby="A1-heading">
-          <h4 id="A1-heading">A1. Physical models (4-parameters)</h4>
-            <p><strong>Overview.</strong> Semi-analytic explosions with four core parameters controlling energy, radius, ejecta mass, and radioactive contribution.
-            The release includes time-dependent observables  plus generation metadata.</p>
-            <p class="muted">Intended use: parameter-recovery benchmarks, uncertainty calibration, and sanity checks against semi-analytic expectations.</p>
-          <h5 class="visually-hidden">Primary files</h5>
-            <div class="file-strip" aria-label="Primary files">
-              <div class="file-item">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zm7-18-5 5h3v6h4V7h3l-5-5z"/></svg>
-                <a href="../resources/datasets/A1/light_curves.parquet" download class="name">light_curves.parquet</a>
-                <span class="meta">· 3.7&nbsp;MB</span>
-                <a class="hash" href="../resources/datasets/A1/checksums_1.txt" title="SHA-256: 8c2c923b4d6b81fd8c9a7a0e9c0e51ca548ed6ff02b5e70d3ddee52d4caed037">SHA-256</a>
+                <figure class="image-item">
+                  <a href="../resources/datasets/A1/Train_accuracy_plot_mos1.png" download>
+                    <img
+                      src="../resources/datasets/A1/Train_accuracy_plot_mos1.png"
+                      alt="Training accuracy per epoch graph"
+                      loading="lazy"
+                    >
+                  </a>
+                  <figcaption>
+                    <strong>Training accuracy curve MOS1.</strong>
+                    Training accuracy per epoch graph.
+                  </figcaption>
+                </figure>
+
+                <figure class="image-item">
+                  <a href="../resources/datasets/A1/Train_accuracy_plot_mos2.png" download>
+                    <img
+                      src="../resources/datasets/A1/Train_accuracy_plot_mos2.png"
+                      alt="Training accuracy per epoch graph"
+                      loading="lazy"
+                    >
+                  </a>
+                  <figcaption>
+                    <strong>Training accuracy curve MOS2.</strong>
+                    Training accuracy per epoch graph.
+                  </figcaption>
+                </figure>
+
+                <figure class="image-item">
+                  <a href="../resources/datasets/A1/Train_accuracy_pn.png" download>
+                    <img
+                      src="../resources/datasets/A1/Train_accuracy_pn.png"
+                      alt="Training accuracy per epoch graph"
+                      loading="lazy"
+                    >
+                  </a>
+                  <figcaption>
+                    <strong>Training accuracy curve PN.</strong>
+                    Training accuracy per epoch graph.
+                  </figcaption>
+                </figure>
               </div>
-              <div class="file-item">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zm7-18-5 5h3v6h4V7h3l-5-5z"/></svg>
-                <a href="../resources/datasets/A1/params.parquet" download class="name">params.parquet</a>
-                <span class="meta">· 4.1&nbsp;KB</span>
-                <a class="hash" href="../resources/datasets/A1/checksums_2.txt" title="SHA-256: 5622c9f849afc4c66cc565e502eef392e2faec415c31f2db87a2ace71f18a41e">SHA-256</a>
+          </article>
+              
+        <article id="A2" class="Validation accuracy" aria-labelledby="A1-heading">
+          <h4 id="A2-heading">A2. Validation Accuracy for each Detector.</h4>
+              <p class="muted">
+                Visual summaries of the images. Click an image to download the full-resolution version.
+              </p>
+
+            <div class="image-strip" aria-label="A2 image previews">
+
+                <figure class="image-item">
+                  <a href="../resources/datasets/A2/Val_loss_plot_mos1.png" download>
+                    <img
+                      src="../resources/datasets/A2/Val_loss_plot_mos1.png"
+                      alt="Validation accuracy per epoch graph"
+                      loading="lazy"
+                    >
+                  </a>
+                  <figcaption>
+                    <strong>Validation accuracy curve MOS1.</strong>
+                    Validation accuracy per epoch graph.
+                  </figcaption>
+                </figure>
+
+                <figure class="image-item">
+                  <a href="../resources/datasets/A2/Val_loss_plot_mos2.png" download>
+                    <img
+                      src="../resources/datasets/A2/Val_loss_plot_mos2.png"
+                      alt="Validation accuracy per epoch graph"
+                      loading="lazy"
+                    >
+                  </a>
+                  <figcaption>
+                    <strong>Validation accuracy curve MOS2.</strong>
+                    Validation accuracy per epoch graph.
+                  </figcaption>
+                </figure>
+
+                <figure class="image-item">
+                  <a href="../resources/datasets/A2/Val_loss_plot_pn.png" download>
+                    <img
+                      src="../resources/datasets/A2/Val_loss_plot_pn.png"
+                      alt="Validation accuracy per epoch graph"
+                      loading="lazy"
+                    >
+                  </a>
+                  <figcaption>
+                    <strong>Validation accuracy curve PN.</strong>
+                    Validation accuracy per epoch graph.
+                  </figcaption>
+                </figure>
               </div>
-            </div>
-            <p class="muted">Last updated: 2025-08-23</p>
+          </article>
 
+          <article id="A3" class="Validation accuracy" aria-labelledby="A1-heading">
+          <h4 id="A2-heading">A3. Validation statistics for each Detector.</h4>
+              <p class="muted">
+                Visual summaries of the images. Click an image to download the full-resolution version.
+              </p>
 
-          <h5>Preview (CSV)</h5>
-          <p class="muted">First 5 rows from a tiny sample file for curves; the full dataset is available via the csv download above.</p>
-          <div class="table-scroll" data-sample-url="../resources/datasets/samples/A1_curves_sample.csv" data-max-cols="10" role="region" aria-label="A1 sample curve table" tabindex="0">
-            <em>Loading preview…</em>
-          </div>
-          <p class="muted">First 5 rows from a tiny sample file for parameters; the full dataset is available via the csv download above.</p>
-          <div class="table-scroll" data-sample-url="../resources/datasets/samples/A1_params_sample.csv" data-max-cols="10" role="region" aria-label="A1 sample parameter table" tabindex="0">
-            <em>Loading preview…</em>
-          </div>
+            <div class="image-strip" aria-label="A2 image previews">
 
-          <h5>FAIR artefacts (status)</h5>
-            <p class="fair-note">We’re progressively adding the artefacts below; items marked “Coming soon” will appear in the next releases.</p>
+                <figure class="image-item">
+                  <a href="../resources/datasets/A3/Val_stats_mos1.png" download>
+                    <img
+                      src="../resources/datasets/A3/Val_stats_mos1.png"
+                      alt="Validation statistics per epoch graph"
+                      loading="lazy"
+                    >
+                  </a>
+                  <figcaption>
+                    <strong>Validation statistics curve MOS1.</strong>
+                    Validation statistics per epoch graph.
+                  </figcaption>
+                </figure>
 
-            <ul class="fair-checklist">
-              <li class="fair-item" data-status="available">
-                <span class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24"><path d="M12 1a11 11 0 1 0 11 11A11.013 11.013 0 0 0 12 1Zm1 11V6h-2v8h7v-2Z"/></svg>
-                </span>
-                <span class="name">Metadata record</span><span class="sep">·</span>
-                <a href="../resources/datasets/A1/metadata.json">metadata.json</a>
-                <span class="state"></span>
-              </li>
+                <figure class="image-item">
+                  <a href="../resources/datasets/A3/Val_stats_mos2.png" download>
+                    <img
+                      src="../resources/datasets/A3/Val_stats_mos2.png"
+                      alt="Validation statistics per epoch graph"
+                      loading="lazy"
+                    >
+                  </a>
+                  <figcaption>
+                    <strong>Validation statistics curve MOS2.</strong>
+                    Validation statistics per epoch graph.
+                  </figcaption>
+                </figure>
 
-              <li class="fair-item" data-status="available">
-                <span class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24"><path d="M4 3h16v2H4zm0 4h16v2H4zm0 4h10v2H4zm0 4h10v2H4z"/></svg>
-                </span>
-                <span class="name">README</span><span class="sep">·</span>
-                <a href="../resources/datasets/A1/README.md">README.md</a>
-                <span class="state"></span>
-              </li>
-
-              <li class="fair-item" data-status="available">
-                <span class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24"><path d="M3 5h18v2H3zm0 6h18v2H3zm0 6h10v2H3z"/></svg>
-                </span>
-                <span class="name">Data dictionary</span><span class="sep">·</span>
-                <a href="../resources/datasets/A1/dictionary.csv">dictionary.csv</a>
-                <span class="state"></span>
-              </li>
-
-              <li class="fair-item" data-status="available">
-                <span class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24"><path d="M12 3 2 9l10 6 10-6-10-6Zm0 8L2 17l10 6 10-6-10-6Z"/></svg>
-                </span>
-                <span class="name">Provenance &amp; methods</span><span class="sep">·</span>
-                <a href="../resources/datasets/A1/provenance.md">provenance.md</a>
-                <span class="state"></span>
-              </li>
-
-              <li class="fair-item" data-status="soon">
-                <span class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24"><path d="M6 20h12v-2H6v2ZM8 2h8l1 4H7l1-4Zm-1 6h10l-1.5 9h-7L7 8Z"/></svg>
-                </span>
-                <span class="name">Licensing &amp; citation</span><span class="sep">·</span>
-                <a href="../resources/datasets/A1/LICENSE">LICENCE</a> · <a href="/resources/datasets/A1/citation.txt">citation.txt</a>
-                <span class="state"></span>
-              </li>
-
-              <li class="fair-item" data-status="soon">
-                <span class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24"><path d="M4 4h16v2H4zm0 6h16v2H4zm0 6h10v2H4z"/></svg>
-                </span>
-                <span class="name">Supplementary materials</span><span class="sep">·</span>
-                <a href="../resources/datasets/A1/supplements/">notebooks, diagrams, scripts</a>
-                <span class="state"></span>
-              </li>
-            </ul>
-
-
-        </article>
-
-        <article id="A2" class="dataset frame" aria-labelledby="A2-heading">
-          <h4 id="A2-heading">A2. Physical models (7-parameters)</h4>
-            <p><strong>Overview.</strong> An expanded physical grid with seven parameters to capture a broader range of progenitor and CSM scenarios.
-            Useful for ablation studies and robustness tests when moving from compact to richer physical descriptions.</p>
-            <p class="muted">Intended use: stress-testing model generalisation and examining parameter identifiability under increased realism.</p>
-          <h5 class="visually-hidden">Primary files</h5>
-            <div class="file-strip" aria-label="Primary files">
-              <div class="file-item">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zm7-18-5 5h3v6h4V7h3l-5-5z"/></svg>
-                <a href="../resources/datasets/A2/light_curves.parquet" download class="name">light_curves.parquet</a>
-                <span class="meta">· 21.6&nbsp;MB</span>
-                <a class="hash" href="../resources/datasets/A2/checksums_1.txt" title="SHA-256: b2ae74e83b40a98a6344909e8c58ea784af26088429760ed0a814226554bf867">SHA-256</a>
+                <figure class="image-item">
+                  <a href="../resources/datasets/A3/Val_stats_pn.png" download>
+                    <img
+                      src="../resources/datasets/A3/Val_stats_pn.png"
+                      alt="Validation statistics per epoch graph"
+                      loading="lazy"
+                    >
+                  </a>
+                  <figcaption>
+                    <strong>Validation statistics curve PN.</strong>
+                    Validation statistics per epoch graph.
+                  </figcaption>
+                </figure>
               </div>
-              <div class="file-item">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zm7-18-5 5h3v6h4V7h3l-5-5z"/></svg>
-                <a href="../resources/datasets/A2/params.parquet" download class="name">params.parquet</a>
-                <span class="meta">· 6.1&nbsp;KB</span>
-                <a class="hash" href="../resources/datasets/A2/checksums_2.txt" title="SHA-256: 859099ba398645a9c4ed97cb464881863001fa3c14592b840bcd60b40a665f2b">SHA-256</a>
-              </div>
-            </div>
-            <p class="muted">Last updated: <time datetime="2025-08-23">2025-08-23</time></p>
-
-
-          <h5>Preview (CSV)</h5>
-          <p class="muted">First 5 rows from a tiny sample file for curves; the full dataset is available via the .parquet download above.</p>
-          <div class="table-scroll" data-sample-url="../resources/datasets/samples/A2_curves_sample.csv" data-max-cols="10" role="region" aria-label="A2 sample curve table" tabindex="0">
-            <em>Loading preview…</em>
-          </div>
-          <p class="muted">First 5 rows from a tiny sample file for parameters; the full dataset is available via the .parquet download above.</p>
-          <div class="table-scroll" data-sample-url="../resources/datasets/samples/A2_params_sample.csv" data-max-cols="10" role="region" aria-label="A2 sample parameter table" tabindex="0">
-            <em>Loading preview…</em>
-          </div>
-
-
-          <h5>FAIR artefacts (status)</h5>
-            <p class="fair-note">We’re progressively adding the artefacts below; items marked “Coming soon” will appear in the next releases.</p>
-
-            <ul class="fair-checklist">
-              <li class="fair-item" data-status="available">
-                <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 1a11 11 0 1 0 11 11A11.013 11.013 0 0 0 12 1Zm1 11V6h-2v8h7v-2Z"/></svg></span>
-                <span class="name">Metadata record</span> <span class="sep">·</span>
-                <a href="../resources/datasets/A2/metadata.json">metadata.json</a>
-                <span class="state"></span>
-              </li>
-
-              <li class="fair-item" data-status="available">
-                <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 3h16v2H4zm0 4h16v2H4zm0 4h10v2H4zm0 4h10v2H4z"/></svg></span>
-                <span class="name">README</span> <span class="sep">·</span>
-                <a href="../resources/datasets/A2/README.md">README.md</a>
-                <span class="state"></span>
-              </li>
-
-              <li class="fair-item" data-status="available">
-                <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 5h18v2H3zm0 6h18v2H3zm0 6h10v2H3z"/></svg></span>
-                <span class="name">Data dictionary</span> <span class="sep">·</span>
-                <a href="../resources/datasets/A2/dictionary.csv">dictionary.csv</a>
-                <span class="state"></span>
-              </li>
-
-              <li class="fair-item" data-status="available">
-                <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 2 9l10 6 10-6-10-6Zm0 8L2 17l10 6 10-6-10-6Z"/></svg></span>
-                <span class="name">Provenance &amp; methods</span> <span class="sep">·</span>
-                <a href="../resources/datasets/A2/provenance.md">provenance.md</a>
-                <span class="state"></span>
-              </li>
-
-              <li class="fair-item" data-status="soon">
-                <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 20h12v-2H6v2ZM8 2h8l1 4H7l1-4Zm-1 6h10l-1.5 9h-7L7 8Z"/></svg></span>
-                <span class="name">Licensing &amp; citation</span> <span class="sep">·</span>
-                <a href="../resources/datasets/A2/LICENSE">LICENCE</a> · <a href="../resources/datasets/A2/citation.txt">citation.txt</a>
-                <span class="state"></span>
-              </li>
-
-              <li class="fair-item" data-status="soon">
-                <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16v2H4zm0 6h16v2H4zm0 6h10v2H4z"/></svg></span>
-                <span class="name">Supplementary materials</span> <span class="sep">·</span>
-                <a href="../resources/datasets/A2/supplements/">notebooks, diagrams, scripts</a>
-                <span class="state"></span>
-              </li>
-            </ul>
-
-
-        </article>
-        -->
+          </article>
       </section>
 
       <!-- Category B -->
-      <section id="B" class="category-band band-b" aria-labelledby="B-heading">
-        <h3 id="B-heading">B. Real Supernova Observations</h3>
-        <!--
-        <article id="B1" class="dataset frame" aria-labelledby="B1-heading">
-          <h4 id="B1-heading">B1. Real observations</h4>
-            <p><strong>Overview.</strong> Curated multi-band observations with cadence, passbands, uncertainty model, and basic quality flags.
-            Where possible, records are mapped to standard naming and include minimal provenance notes.</p>
-            <p class="muted">Intended use: evaluating methods trained on synthetic data, domain shift studies, and end-to-end validation on real light curves.</p>
+      <section id="B" class="inference plots" aria-labelledby="B-heading">
+        <h3 id="B-heading">B. Inference Plots</h3>      
+        <article id="B1" class="inference plots" aria-labelledby="B2-heading">
+          <h4 id="B1-heading">B1. Plot of inference signal comparison for each Detector.</h4>
+              <p class="muted">
+                Visual summaries of the images. Click an image to download the full-resolution version.
+              </p>
 
-          <h5 class="visually-hidden">Primary files</h5>
-            <div class="file-strip" aria-label="Primary files">
-              <div class="file-item">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zm7-18-5 5h3v6h4V7h3l-5-5z"/></svg>
-                <a href="../resources/datasets/B1/74_SNE_bolometric_real.parquet" download class="name">74_SNE_bolometric_real.parquet</a>
-                <span class="meta">· 248.1&nbsp;KB</span>
-               <a class="hash" href="../resources/datasets/B1/checksums.txt" title="SHA-256: 71bcc40749043458815c6d874d7b4b2ff44d82fd77852fc1f41ae2743f3d1239">SHA-256</a>
+            <div class="image-strip" aria-label="B1 image previews">
+
+                <figure class="image-item">
+                  <a href="../resources/datasets/B1/Post_Inference_Signal_comparison_mos1_log_scale.png" download>
+                    <img
+                      src="../resources/datasets/B1/Post_Inference_Signal_comparison_mos1_log_scale.png"
+                      alt="Inference signal comparison for MOS1"
+                      loading="lazy"
+                    >
+                  </a>
+                  <figcaption>
+                    <strong>Inference signal comparison for MOS1</strong>
+                    Log-scale energy spectra comparison between Signal GTIs and Predicted Signal BTIs.
+                  </figcaption>
+                </figure>
+
+                <figure class="image-item">
+                  <a href="../resources/datasets/B1/Post_Inference_Signal_comparison_mos2_log_scale.png" download>
+                    <img
+                      src="../resources/datasets/B1/Post_Inference_Signal_comparison_mos2_log_scale.png"
+                      alt="Inference signal comparison for MOS2"
+                      loading="lazy"
+                    >
+                  </a>
+                  <figcaption>
+                    <strong>Inference signal comparison for MOS2</strong>
+                    Log-scale energy spectra comparison between Signal GTIs and Predicted Signal BTIs.
+                  </figcaption>
+                </figure>
+
+                <figure class="image-item">
+                  <a href="../resources/datasets/B1/Post_Inference_Signal_comparison_pn_log_scale.png" download>
+                    <img
+                      src="../resources/datasets/B1/Post_Inference_Signal_comparison_pn_log_scale.png"
+                      alt="Inference signal comparison for PN"
+                      loading="lazy"
+                    >
+                  </a>
+                  <figcaption>
+                    <strong>Inference signal comparison for PN</strong>
+                    Log-scale energy spectra comparison between Signal GTIs and Predicted Signal BTIs.
+                  </figcaption>
+                </figure>
               </div>
-            </div>
-            <p class="muted">Last updated: <time datetime="2025-08-23">2025-08-23</time></p>
-
-
-          <h5>Preview (CSV)</h5>
-          <p class="muted">First 5 rows from a tiny sample file.</p>
-          <div class="table-scroll" data-sample-url="../resources/datasets/samples/B1_sample.csv" data-max-cols="10" role="region" aria-label="B1 sample table" tabindex="0">
-            <em>Loading preview…</em>
-          </div>
-
-          <h5>FAIR artefacts (status)</h5>
-            <p class="fair-note">We’re progressively adding the artefacts below; items marked “Coming soon” will appear in the next releases.</p>
-
-            <ul class="fair-checklist">
-              <li class="fair-item" data-status="available">
-                <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 1a11 11 0 1 0 11 11A11.013 11.013 0 0 0 12 1Zm1 11V6h-2v8h7v-2Z"/></svg></span>
-                <span class="name">Metadata record</span> <span class="sep">·</span>
-                <a href="../resources/datasets/B1/metadata.json">metadata.json</a>
-                <span class="state"></span>
-              </li>
-
-              <li class="fair-item" data-status="available">
-                <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 3h16v2H4zm0 4h16v2H4zm0 4h10v2H4zm0 4h10v2H4z"/></svg></span>
-                <span class="name">README</span> <span class="sep">·</span>
-                <a href="../resources/datasets/B1/README.md">README.md</a>
-                <span class="state"></span>
-              </li>
-
-              <li class="fair-item" data-status="available">
-                <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 5h18v2H3zm0 6h18v2H3zm0 6h10v2H3z"/></svg></span>
-                <span class="name">Data dictionary</span> <span class="sep">·</span>
-                <a href="../resources/datasets/B1/dictionary.csv">dictionary.csv</a>
-                <span class="state"></span>
-              </li>
-
-              <li class="fair-item" data-status="available">
-                <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 2 9l10 6 10-6-10-6Zm0 8L2 17l10 6 10-6-10-6Z"/></svg></span>
-                <span class="name">Provenance &amp; methods</span> <span class="sep">·</span>
-                <a href="../resources/datasets/B1/provenance.md">provenance.md</a>
-                <span class="state"></span>
-              </li>
-
-              <li class="fair-item" data-status="soon">
-                <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 20h12v-2H6v2ZM8 2h8l1 4H7l1-4Zm-1 6h10l-1.5 9h-7L7 8Z"/></svg></span>
-                <span class="name">Licensing &amp; citation</span> <span class="sep">·</span>
-                <a href="../resources/datasets/B1/LICENSE">LICENCE</a> · <a href="/resources/datasets/B1/citation.txt">citation.txt</a>
-                <span class="state"></span>
-              </li>
-
-              <li class="fair-item" data-status="soon">
-                <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16v2H4zm0 6h16v2H4zm0 6h10v2H4z"/></svg></span>
-                <span class="name">Supplementary materials</span> <span class="sep">·</span>
-                <a href="../resources/datasets/B1/supplements/">notebooks, diagrams, scripts</a>
-                <span class="state"></span>
-              </li>
-            </ul>
-
-
-        </article>
-      -->
+          </article>
       </section>
 
       <!-- Category C -->
@@ -367,7 +317,7 @@
         <!-- C1 SYNTHETIC MOS 1-->
         <article id="C1" class="dataset frame" aria-labelledby="C1-heading">
           <h4 id="C1-heading">C1. Synthetic EPIC-MOS1 Camera Flare events</h4>
-            <p><strong>Overview.</strong> This collection contains synthetic Solar Flare events generated with the ESPAI GenAI model, designed to emulate EPIC-MOS1 camera observations. Each event is provided as a <code>.csv</code> files provide Pulse Invariants and DETX and DETY ; releases will ship with transparent generation settings.</p>
+            <p><strong>Overview.</strong> This collection contains synthetic Solar Flare events generated with the ESPAI Kernel Density Estimator (KDE) GenAI model, designed to emulate EPIC-MOS1 camera observations. Each event is provided as a <code>.csv</code> files provide Pulse Invariants and DETX and DETY ; releases will ship with transparent generation settings.</p>
             <p class="muted">Intended use: data augmentation, controlled experiments on cadence/noise, and benchmarking generalisation.</p>
 
           <h5 class="visually-hidden">Primary files</h5>
@@ -375,11 +325,21 @@
               <div class="file-item">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zm7-18-5 5h3v6h4V7h3l-5-5z"/></svg>
                 <a href="../resources/datasets/C1/mos1_generated_distribution_KDE.csv" download class="name">mos1_generated_distribution_KDE.csv</a>
-                <span class="meta">· 45.9&nbsp;MB </span>
+                <span class="meta">· 0,014&nbsp;MB </span>
                 <a class="hash" href="../resources/datasets/C1/checksums.txt">SHA-256</a>
               </div>
             </div>
-            <p class="muted">Last updated: <time datetime="2025-08-23">2025-08-23</time></p>
+            <p class="muted">Last updated: <time datetime="2025-12-18">2025-12-18</time></p>
+
+            <h5 class="visually-hidden">Primary files</h5>
+            <div class="file-strip" aria-label="Primary files">
+              <div class="file-item">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zm7-18-5 5h3v6h4V7h3l-5-5z"/></svg>
+                <a href="../resources/datasets/C1/mos1_generated_distribution_comparison_KDE.png" download class="name">mos1_generated_distribution_comparison_KDE.png</a>
+                <span class="meta">· 0.026&nbsp;MB </span>
+              </div>
+            </div>
+            <p class="muted">Last updated: <time datetime="2025-12-18">2025-12-18</time></p>
 
 
           <h5>Preview (CSV)</h5>
@@ -392,38 +352,38 @@
             <p class="fair-note">We’re progressively adding the artefacts below; items marked “Coming soon” will appear in the next releases.</p>
 
             <ul class="fair-checklist">
-              <li class="fair-item" data-status="available">
+              <li class="fair-item" data-status="soon">
                 <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 1a11 11 0 1 0 11 11A11.013 11.013 0 0 0 12 1Zm1 11V6h-2v8h7v-2Z"/></svg></span>
                 <span class="name">Metadata record</span> <span class="sep">·</span>
-                <a href="../resources/datasets/C1/metadata.json">metadata.json</a>
+                <!--<a href="../resources/datasets/C1/metadata.json">metadata.json</a>-->
                 <span class="state"></span>
               </li>
 
-              <li class="fair-item" data-status="available">
+              <li class="fair-item" data-status="soon">
                 <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 3h16v2H4zm0 4h16v2H4zm0 4h10v2H4zm0 4h10v2H4z"/></svg></span>
                 <span class="name">README</span> <span class="sep">·</span>
-                <a href="../resources/datasets/C1/README.md">README.md</a>
+                <!--<a href="../resources/datasets/C1/README.md">README.md</a>-->
                 <span class="state"></span>
               </li>
 
-              <li class="fair-item" data-status="available">
+              <li class="fair-item" data-status="soon">
                 <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 5h18v2H3zm0 6h18v2H3zm0 6h10v2H3z"/></svg></span>
                 <span class="name">Data dictionary</span> <span class="sep">·</span>
-                <a href="../resources/datasets/C1/dictionary.csv">dictionary.csv</a>
+                <!--<a href="../resources/datasets/C1/dictionary.csv">dictionary.csv</a>-->
                 <span class="state"></span>
               </li>
 
-              <li class="fair-item" data-status="available">
+              <li class="fair-item" data-status="soon">
                 <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 2 9l10 6 10-6-10-6Zm0 8L2 17l10 6 10-6-10-6Z"/></svg></span>
                 <span class="name">Provenance &amp; methods</span> <span class="sep">·</span>
-                <a href="../resources/datasets/C1/provenance.md">provenance.md</a>
+                <!--<a href="../resources/datasets/C1/provenance.md">provenance.md</a> -->
                 <span class="state"></span>
               </li>
 
               <li class="fair-item" data-status="soon">
                 <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 20h12v-2H6v2ZM8 2h8l1 4H7l1-4Zm-1 6h10l-1.5 9h-7L7 8Z"/></svg></span>
                 <span class="name">Licensing &amp; citation</span> <span class="sep">·</span>
-                <a href="/resources/datasets/C1/LICENSE">LICENCE</a> · <a href="/resources/datasets/C1/citation.txt">citation.txt</a>
+                <!--<a href="/resources/datasets/C1/LICENSE">LICENCE</a> · <a href="/resources/datasets/C1/citation.txt">citation.txt</a>-->
                 <span class="state"></span>
               </li>
               <!--
@@ -438,7 +398,7 @@
         <!-- C1 SYNTHETIC MOS 2-->
         <article id="C2" class="dataset frame" aria-labelledby="C2-heading">
           <h4 id="C2-heading">C2. Synthetic EPIC-MOS2 Camera Flare events</h4>
-            <p><strong>Overview.</strong> This collection contains synthetic Solar Flare events generated with the ESPAI GenAI model, designed to emulate EPIC-MOS1 camera observations. Each event is provided as a <code>.csv</code> files provide Pulse Invariants and DETX and DETY ; releases will ship with transparent generation settings.</p>
+            <p><strong>Overview.</strong> This collection contains synthetic Solar Flare events generated with the ESPAI Kernel Density Estimator (KDE) GenAI model, designed to emulate EPIC-MOS2 camera observations. Each event is provided as a <code>.csv</code> files provide Pulse Invariants and DETX and DETY ; releases will ship with transparent generation settings.</p>
             <p class="muted">Intended use: data augmentation, controlled experiments on cadence/noise, and benchmarking generalisation.</p>
 
           <h5 class="visually-hidden">Primary files</h5>
@@ -446,12 +406,21 @@
               <div class="file-item">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zm7-18-5 5h3v6h4V7h3l-5-5z"/></svg>
                 <a href="../resources/datasets/C1/mos2_generated_distribution_KDE.csv" download class="name">mos2_generated_distribution_KDE.csv</a>
-                <span class="meta">· 45.9&nbsp;MB </span>
+                <span class="meta">· 0,025&nbsp;MB </span>
                 <a class="hash" href="../resources/datasets/C1/checksums.txt">SHA-256</a>
               </div>
             </div>
-            <p class="muted">Last updated: <time datetime="2025-08-23">2025-08-23</time></p>
+            <p class="muted">Last updated: <time datetime="2025-12-18">2025-12-18</time></p>
 
+            <h5 class="visually-hidden">Primary files</h5>
+            <div class="file-strip" aria-label="Primary files">
+              <div class="file-item">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zm7-18-5 5h3v6h4V7h3l-5-5z"/></svg>
+                <a href="../resources/datasets/C2/mos2_generated_distribution_comparison_KDE.png" download class="name">mos2_generated_distribution_comparison_KDE.png</a>
+                <span class="meta">· 0,031&nbsp;MB </span>
+              </div>
+            </div>
+            <p class="muted">Last updated: <time datetime="2025-12-18">2025-12-18</time></p>
 
           <h5>Preview (CSV)</h5>
           <p class="muted">First 5 rows from a tiny sample file.</p>
@@ -463,38 +432,38 @@
             <p class="fair-note">We’re progressively adding the artefacts below; items marked “Coming soon” will appear in the next releases.</p>
 
             <ul class="fair-checklist">
-              <li class="fair-item" data-status="available">
+              <li class="fair-item" data-status="soon">
                 <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 1a11 11 0 1 0 11 11A11.013 11.013 0 0 0 12 1Zm1 11V6h-2v8h7v-2Z"/></svg></span>
                 <span class="name">Metadata record</span> <span class="sep">·</span>
-                <a href="../resources/datasets/C1/metadata.json">metadata.json</a>
+                <!--<a href="../resources/datasets/C1/metadata.json">metadata.json</a>-->
                 <span class="state"></span>
               </li>
 
-              <li class="fair-item" data-status="available">
+              <li class="fair-item" data-status="soon">
                 <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 3h16v2H4zm0 4h16v2H4zm0 4h10v2H4zm0 4h10v2H4z"/></svg></span>
                 <span class="name">README</span> <span class="sep">·</span>
-                <a href="../resources/datasets/C1/README.md">README.md</a>
+                <!--<a href="../resources/datasets/C1/README.md">README.md</a>-->
                 <span class="state"></span>
               </li>
 
-              <li class="fair-item" data-status="available">
+              <li class="fair-item" data-status="soon">
                 <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 5h18v2H3zm0 6h18v2H3zm0 6h10v2H3z"/></svg></span>
                 <span class="name">Data dictionary</span> <span class="sep">·</span>
-                <a href="../resources/datasets/C1/dictionary.csv">dictionary.csv</a>
+                <!--<a href="../resources/datasets/C1/dictionary.csv">dictionary.csv</a>-->
                 <span class="state"></span>
               </li>
 
-              <li class="fair-item" data-status="available">
+              <li class="fair-item" data-status="soon">
                 <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 2 9l10 6 10-6-10-6Zm0 8L2 17l10 6 10-6-10-6Z"/></svg></span>
                 <span class="name">Provenance &amp; methods</span> <span class="sep">·</span>
-                <a href="../resources/datasets/C1/provenance.md">provenance.md</a>
+                <!--<a href="../resources/datasets/C1/provenance.md">provenance.md</a>-->
                 <span class="state"></span>
               </li>
 
               <li class="fair-item" data-status="soon">
                 <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 20h12v-2H6v2ZM8 2h8l1 4H7l1-4Zm-1 6h10l-1.5 9h-7L7 8Z"/></svg></span>
                 <span class="name">Licensing &amp; citation</span> <span class="sep">·</span>
-                <a href="/resources/datasets/C1/LICENSE">LICENCE</a> · <a href="/resources/datasets/C1/citation.txt">citation.txt</a>
+                <!--<a href="/resources/datasets/C1/LICENSE">LICENCE</a> · <a href="/resources/datasets/C1/citation.txt">citation.txt</a>-->
                 <span class="state"></span>
               </li>
               <!--
@@ -509,7 +478,7 @@
         <!-- C3 SYNTHETIC PN -->
         <article id="C3" class="dataset frame" aria-labelledby="C3-heading">
           <h4 id="C3-heading">C3. Synthetic EPIC-PN Camera Flare events</h4>
-            <p><strong>Overview.</strong> This collection contains synthetic Solar Flare events generated with the ESPAI GenAI model, designed to emulate EPIC-MOS1 camera observations. Each event is provided as a <code>.csv</code> files provide Pulse Invariants and DETX and DETY ; releases will ship with transparent generation settings.</p>
+            <p><strong>Overview.</strong> This collection contains synthetic Solar Flare events generated with the ESPAI Kernel Density Estimator (KDE) GenAI model, designed to emulate EPIC-PN camera observations. Each event is provided as a <code>.csv</code> files provide Pulse Invariants and DETX and DETY ; releases will ship with transparent generation settings.</p>
             <p class="muted">Intended use: data augmentation, controlled experiments on cadence/noise, and benchmarking generalisation.</p>
 
           <h5 class="visually-hidden">Primary files</h5>
@@ -517,12 +486,21 @@
               <div class="file-item">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zm7-18-5 5h3v6h4V7h3l-5-5z"/></svg>
                 <a href="../resources/datasets/C1/pn_generated_distribution_KDE.csv" download class="name">pn_generated_distribution_KDE.csv</a>
-                <span class="meta">· 45.9&nbsp;MB </span>
+                <span class="meta">· 0.035&nbsp;MB </span>
                 <a class="hash" href="../resources/datasets/C1/checksums.txt">SHA-256</a>
               </div>
             </div>
-            <p class="muted">Last updated: <time datetime="2025-08-23">2025-08-23</time></p>
+            <p class="muted">Last updated: <time datetime="2025-12-18">2025-12-18</time></p>
 
+            <h5 class="visually-hidden">Primary files</h5>
+            <div class="file-strip" aria-label="Primary files">
+              <div class="file-item">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zm7-18-5 5h3v6h4V7h3l-5-5z"/></svg>
+                <a href="../resources/datasets/C3/pn_generated_distribution_comparison_KDE.png" download class="name">pn_generated_distribution_comparison_KDE.png</a>
+                <span class="meta">· 0.028&nbsp;MB </span>
+              </div>
+            </div>
+            <p class="muted">Last updated: <time datetime="2025-12-18">2025-12-18</time></p>
 
           <h5>Preview (CSV)</h5>
           <p class="muted">First 5 rows from a tiny sample file.</p>
@@ -534,38 +512,38 @@
             <p class="fair-note">We’re progressively adding the artefacts below; items marked “Coming soon” will appear in the next releases.</p>
 
             <ul class="fair-checklist">
-              <li class="fair-item" data-status="available">
+              <li class="fair-item" data-status="soon">
                 <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 1a11 11 0 1 0 11 11A11.013 11.013 0 0 0 12 1Zm1 11V6h-2v8h7v-2Z"/></svg></span>
                 <span class="name">Metadata record</span> <span class="sep">·</span>
-                <a href="../resources/datasets/C1/metadata.json">metadata.json</a>
+                <!--<a href="../resources/datasets/C1/metadata.json">metadata.json</a>-->
                 <span class="state"></span>
               </li>
 
-              <li class="fair-item" data-status="available">
+              <li class="fair-item" data-status="soon">
                 <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 3h16v2H4zm0 4h16v2H4zm0 4h10v2H4zm0 4h10v2H4z"/></svg></span>
                 <span class="name">README</span> <span class="sep">·</span>
-                <a href="../resources/datasets/C1/README.md">README.md</a>
+                <!--<a href="../resources/datasets/C1/README.md">README.md</a>-->
                 <span class="state"></span>
               </li>
 
-              <li class="fair-item" data-status="available">
+              <li class="fair-item" data-status="soon">
                 <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 5h18v2H3zm0 6h18v2H3zm0 6h10v2H3z"/></svg></span>
                 <span class="name">Data dictionary</span> <span class="sep">·</span>
-                <a href="../resources/datasets/C1/dictionary.csv">dictionary.csv</a>
+                <!--<a href="../resources/datasets/C1/dictionary.csv">dictionary.csv</a>-->
                 <span class="state"></span>
               </li>
 
-              <li class="fair-item" data-status="available">
+              <li class="fair-item" data-status="soon">
                 <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 2 9l10 6 10-6-10-6Zm0 8L2 17l10 6 10-6-10-6Z"/></svg></span>
                 <span class="name">Provenance &amp; methods</span> <span class="sep">·</span>
-                <a href="../resources/datasets/C1/provenance.md">provenance.md</a>
+                <!--<a href="../resources/datasets/C1/provenance.md">provenance.md</a>-->
                 <span class="state"></span>
               </li>
 
               <li class="fair-item" data-status="soon">
                 <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 20h12v-2H6v2ZM8 2h8l1 4H7l1-4Zm-1 6h10l-1.5 9h-7L7 8Z"/></svg></span>
                 <span class="name">Licensing &amp; citation</span> <span class="sep">·</span>
-                <a href="/resources/datasets/C1/LICENSE">LICENCE</a> · <a href="/resources/datasets/C1/citation.txt">citation.txt</a>
+                <!--<a href="/resources/datasets/C1/LICENSE">LICENCE</a> · <a href="/resources/datasets/C1/citation.txt">citation.txt</a>-->
                 <span class="state"></span>
               </li>
               <!--
@@ -618,13 +596,13 @@
         <!-- Once the repo is public you can: (1) remove this section (2) convert it to a Contents summary, with links to real folders/files in Github-->
         <details class="repo-more">
           <summary>Planned contents</summary>
-          <!--
           <ul>
-            <li>Training &amp; evaluation scripts</li>
-            <li>Model architectures (physical + GenAI variants)</li>
-            <li>Data loaders and preprocessing utilities</li>
-            <li>Reproducible configs and example notebooks</li>
-          </ul>-->
+            <li>Automated data retrieval and SAS processing pipelines</li>
+            <li>Data loaders, preprocessing, and feature engineering utilities</li>
+            <li>Training and evaluation scripts for solar flare classification models</li>
+            <li>Generative models (KDE / VAE / Autoencoders) for synthetic data generation</li>
+            <li>Statistical validation tools and reproducible configurations</li>
+          </ul>
         </details>
       </article>
     </section>
@@ -674,13 +652,13 @@ Koexai. URL: https://ESPAI.koexai.com/resources/  Licence: CC BY 4.0.</pre>
 
         <h4>Dataset BibTeX (template)</h4>
         <pre class="cite">@dataset{ESPAI_C_v0_1_2025,
-      author  = {ESPAI Project},
-      title   = {ESPAI Light Curves — Synthetic Solar Flare Dataset},
+      author  = {Koexai},
+      title   = {ESPAI Solar Flare — Synthetic Solar Flare Dataset},
       year    = {2025},
       version = {0.1},
       url     = {https://ESPAI.koexai.com/resources/},
       license = {CC BY 4.0},
-      note    = {<!-- Replace with DOI when available-->}
+      note    = {Replace with DOI when available}
     }</pre>
         <p class="muted">Tip: if a dataset provides its own <code>citation.txt</code> or DOI, please use that instead of the template above.</p>
       </section>
@@ -699,13 +677,13 @@ Source code. URL: https://ESPAI.koexai.com/resources/  Licence: MIT.</pre>
 
         <h4>Software BibTeX (template)</h4>
         <pre class="cite">@software{ESPAI_core_v0_1_2025,
-      author  = {ESPAI Project},
+      author  = {Koexai},
       title   = {ESPAI Core},
       year    = {2025},
       version = {0.1},
       url     = {https://ESPAI.koexai.com/resources/},
       license = {MIT},
-      note    = {<!-- Replace with repository URL and tag when public -->}
+      note    = {Replace with repository URL and tag when public}
     }</pre>
       </section>
     </section>
