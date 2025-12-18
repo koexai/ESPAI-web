@@ -13,7 +13,12 @@
     <header>
       <div class="container">
         <div class="header-content">
-          <a class="logo" href="/">ESPAI</a>
+          <!--<a class="logo" href="/">ESPAI</a>-->
+          <div class="logo" style="display: flex; align-items: center; gap: 0.5em;">
+              <img src="../assets/img/logos/koexai logo.png" alt="Koexai Logo" style="height: 2.0em;">
+              <img src="../assets/img/logos/verticle_line.png" alt="Verticle LIne" style="height: 1.0em;">
+              ESPAI
+          </div>
           <nav aria-label="Primary">
             <a href="/#about">About</a>
             <a href="/#project">Project</a>
@@ -49,14 +54,14 @@
           <ul>
             <li><a href="#A">A. Training / Validation Metrics</a>
               <ul>
-                <li><a href="#A1">A1. Training Accuracy for each Detector.</a></li>
-                <li><a href="#A2">A2. Validation Accuracy for each Detector.</a></li>
-                <li><a href="#A3">A3. Validation statistics for each Detector.</a></li>
+                <li><a href="#A1">A1. Training Accuracy for each detector.</a></li>
+                <li><a href="#A2">A2. Validation Accuracy for each detector.</a></li>
+                <li><a href="#A3">A3. Validation statistics for each detector.</a></li>
               </ul>
             </li>
             <li><a href="#B">B. Inference Plots</a>
               <ul>
-                <li><a href="#B1">B1. Plot of inference signal comparison for each Detector.</a></li>
+                <li><a href="#B1">B1. Plot of inference signal comparison for each detector.</a></li>
               </ul>
             </li>
             <li><a href="#C">C. Synthetic Dataset</a>
@@ -67,7 +72,7 @@
               </ul>
             <li><a href="#code">Source Code</a>
               <ul>
-                <li><a href="#code-core">ESPAI Core Repository</a></li>
+                <li><a href="#code-core-heading">ESPAI Core Repository</a></li>
               </ul>
             </li>
             <li><a href="#pub-diagrams">Diagrams &amp; Technical Notes</a></li>
@@ -95,10 +100,10 @@
 
 
       <!-- Category A -->
-      <section id="A" class="Showing Plots" aria-labelledby="A-heading">
+      <section id="A" class="category-band band-a" aria-labelledby="A-heading">
         <h3 id="A-heading">A. Training / Validation Metrics</h3>      
         <article id="A1" class="Training Accuracy" aria-labelledby="A1-heading">
-          <h4 id="A1-heading">A1. Training Accuracy for each Detector.</h4>
+          <h4 id="A1-heading">A1. Training Accuracy for each detector.</h4>
               <p class="muted">
                 Visual summaries of the images. Click an image to download the full-resolution version.
               </p>
@@ -136,7 +141,7 @@
                 <figure class="image-item">
                   <a href="../resources/datasets/A1/Train_accuracy_pn.png" download>
                     <img
-                      src="../resources/datasets/A1/Train_accuracy_pn.png"
+                      src="../resources/datasets/A1/Train_accuracy_plot_pn.png"
                       alt="Training accuracy per epoch graph"
                       loading="lazy"
                     >
@@ -150,11 +155,11 @@
           </article>
               
         <article id="A2" class="Validation accuracy" aria-labelledby="A1-heading">
-          <h4 id="A2-heading">A2. Validation Accuracy for each Detector.</h4>
+          <h4 id="A2-heading">A2. Validation Accuracy for each detector.</h4>
               <p class="muted">
                 Visual summaries of the images. Click an image to download the full-resolution version.
               </p>
-
+              
             <div class="image-strip" aria-label="A2 image previews">
 
                 <figure class="image-item">
@@ -198,11 +203,11 @@
                     Validation accuracy per epoch graph.
                   </figcaption>
                 </figure>
-              </div>
+            </div>
           </article>
 
           <article id="A3" class="Validation accuracy" aria-labelledby="A1-heading">
-          <h4 id="A2-heading">A3. Validation statistics for each Detector.</h4>
+          <h4 id="A3-heading">A3. Validation statistics for each detector.</h4>
               <p class="muted">
                 Visual summaries of the images. Click an image to download the full-resolution version.
               </p>
@@ -255,10 +260,11 @@
       </section>
 
       <!-- Category B -->
-      <section id="B" class="inference plots" aria-labelledby="B-heading">
+      <section id="B" class="category-band band-b" aria-labelledby="B-heading">
         <h3 id="B-heading">B. Inference Plots</h3>      
+        
         <article id="B1" class="inference plots" aria-labelledby="B2-heading">
-          <h4 id="B1-heading">B1. Plot of inference signal comparison for each Detector.</h4>
+          <h4 id="B1-heading">B1. Plot of inference signal comparison for each detector.</h4>
               <p class="muted">
                 Visual summaries of the images. Click an image to download the full-resolution version.
               </p>
@@ -394,8 +400,9 @@
                 <span class="state"></span>
               </li> -->
             </ul>
-            
-        <!-- C1 SYNTHETIC MOS 2-->
+          </article>
+      
+      <!-- C2 SYNTHETIC MOS 2-->
         <article id="C2" class="dataset frame" aria-labelledby="C2-heading">
           <h4 id="C2-heading">C2. Synthetic EPIC-MOS2 Camera Flare events</h4>
             <p><strong>Overview.</strong> This collection contains synthetic Solar Flare events generated with the ESPAI Kernel Density Estimator (KDE) GenAI model, designed to emulate EPIC-MOS2 camera observations. Each event is provided as a <code>.csv</code> files provide Pulse Invariants and DETX and DETY ; releases will ship with transparent generation settings.</p>
@@ -474,7 +481,7 @@
                 <span class="state"></span>
               </li> -->
             </ul>   
-
+        </article>
         <!-- C3 SYNTHETIC PN -->
         <article id="C3" class="dataset frame" aria-labelledby="C3-heading">
           <h4 id="C3-heading">C3. Synthetic EPIC-PN Camera Flare events</h4>
@@ -558,10 +565,10 @@
 
       </section>
 
-    </section>
 
 
-    <!-- Source Code -->
+
+      <!-- Source Code -->
     <section id="code" aria-labelledby="code-heading">
       <h2 id="code-heading">Source Code</h2>
         <p class="fair-note">
@@ -652,7 +659,7 @@ Koexai. URL: https://ESPAI.koexai.com/resources/  Licence: CC BY 4.0.</pre>
 
         <h4>Dataset BibTeX (template)</h4>
         <pre class="cite">@dataset{ESPAI_C_v0_1_2025,
-      author  = {Koexai},
+      author  = {Koexai Srl},
       title   = {ESPAI Solar Flare — Synthetic Solar Flare Dataset},
       year    = {2025},
       version = {0.1},

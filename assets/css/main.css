@@ -931,6 +931,7 @@ body.resources-page .toc-panel { margin-top: 0; }
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
+  align-items: start;
 }
 
 .image-item {
@@ -948,4 +949,9 @@ body.resources-page .toc-panel { margin-top: 0; }
   width: 100%;
   max-width: 100%;
   height: auto;
+}
+
+.image-item figcaption {
+  text-align: left; /* Oppure 'left' o 'justify' */
+  padding: 0.5rem 0;
 }
