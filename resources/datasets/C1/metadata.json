@@ -1,13 +1,33 @@
 {
   "title": "MOS1 Synthetic X-ray Event Distribution (KDE)",
   "creators": [
-    {
-      "name": "Luca Naso",
-      "affiliation": "Koexai Srl",
-      "role": "CEO and Founder"
-    }
-  ],
-  "version": "1.0.0",
+  {
+    "name": "Stefano Calì",
+    "affiliation": "Koexai Srl",
+    "role": "Data Scientist Manager"
+  },
+  {
+    "name": "Aldo Barca",
+    "affiliation": "Koexai Srl",
+    "role": "Data Scientist"
+  },
+  {
+    "name": "Vincenzo Del Zoppo",
+    "affiliation": "Koexai Srl",
+    "role": "Data Scientist"
+  },
+  {
+    "name": "Andrea Claudio Grasso",
+    "affiliation": "Koexai Srl",
+    "role": "Data Scientist"
+  },
+  {
+    "name": "Luca Naso",
+    "affiliation": "Koexai Srl",
+    "role": "CEO and Founder"
+  }
+],
+  "version": "1.0",
   "dates": {
     "created": "2025-12-16",
     "released": "2025-12-16",
@@ -18,8 +38,8 @@
     "value": "mos1_generated_distribution_KDE.csv"
   },
   "citation": {
-    "text": "Luca N. MOS1 Synthetic X-ray Event Distribution (KDE) (Version 1.0.0). Generated using Kernel Density Estimation.",
-    "bibtex": "@dataset{luca2025mos1kde,\n  author={Luca Naso et al.},\n  title={MOS1 Synthetic X-ray Event Distribution (KDE)},\n  year={2025},\n  version={1.0.0},\n  note={Generated using Kernel Density Estimation model for X-ray events}\n}"
+    "text": "ESPAI MOS1 Synthetic X-ray Event Distribution (KDE) (Version 1.0). Generated using Kernel Density Estimation.",
+    "bibtex": "@dataset{ESPAI_C_v0_1_2025,\n  author={Koexai Srl},\n  title={ESPAI Solar Flare — Synthetic Solar Flare Dataset},\n  year={2025},\n  version={1.0},\n  note={Replace with DOI when available}\n}"
   },
   "abstract": "This dataset contains 248,963 synthetic X-ray photon events generated using a Kernel Density Estimation (KDE) approach. The data simulates the distribution of events on an X-ray detector (likely XMM-Newton MOS1), characterized by spatial coordinates and energy channels. Each row represents a single photon event with detector coordinates (DETX, DETY) and Pulse Invariant (PI) energy values. This distribution is suitable for background modeling, instrument simulation, or testing machine learning algorithms in high-energy astrophysics.",
   "keywords": [
@@ -55,12 +75,7 @@
       "spatial_range": "DETX/Y approx +/- 1.7e4",
       "energy_range": "PI 300-12000"
     },
-    "limitations": [
-      "Synthetic data depends on KDE bandwidth selection",
-      "Does not contain time of arrival information (TIME column absent)",
-      "Limited to spatial and spectral distribution only"
-    ],
-    "usageGuidance": "Suitable for statistical studies of detector distribution or ML training. Not for timing analysis."
+    "usageGuidance": "Suitable for statistical studies of detector distribution or ML training."
   },
   "access": {
     "licence": "To be specified",
@@ -68,7 +83,7 @@
     "contact": {
       "name": "Luca Naso",
       "email": "luca@koexai.com",
-      "role": "CEO and CTO"
+      "role": "CEO and Founder"
     },
     "projectLink": "N/A"
   }
