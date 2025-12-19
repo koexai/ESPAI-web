@@ -1,5 +1,5 @@
-,dtype
-Unnamed: 0,int64
-DETX,float64
-DETY,float64
-PI,float64
+column_name,dtype,description
+Unnamed: 0,int64,Row index
+DETX,float64,Detector X coordinate (MOS1 reference frame)
+DETY,float64,Detector Y coordinate (MOS1 reference frame)
+PI,float64,Pulse Invariant energy channel
