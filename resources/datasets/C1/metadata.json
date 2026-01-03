@@ -1,37 +1,37 @@
 {
   "title": "MOS1 Synthetic X-ray Event Distribution (KDE)",
   "creators": [
-  {
-    "name": "Stefano Calì",
-    "affiliation": "Koexai Srl",
-    "role": "Data Scientist Manager"
-  },
-  {
-    "name": "Aldo Barca",
-    "affiliation": "Koexai Srl",
-    "role": "Data Scientist"
-  },
-  {
-    "name": "Vincenzo Del Zoppo",
-    "affiliation": "Koexai Srl",
-    "role": "Data Scientist"
-  },
-  {
-    "name": "Andrea Claudio Grasso",
-    "affiliation": "Koexai Srl",
-    "role": "Data Scientist"
-  },
-  {
-    "name": "Luca Naso",
-    "affiliation": "Koexai Srl",
-    "role": "CEO and Founder"
-  }
-],
+    {
+      "name": "Stefano Calì",
+      "affiliation": "Koexai Srl",
+      "role": "Data Scientist Manager"
+    },
+    {
+      "name": "Aldo Barca",
+      "affiliation": "Koexai Srl",
+      "role": "Data Scientist"
+    },
+    {
+      "name": "Vincenzo Del Zoppo",
+      "affiliation": "Koexai Srl",
+      "role": "Data Scientist"
+    },
+    {
+      "name": "Andrea Claudio Grasso",
+      "affiliation": "Koexai Srl",
+      "role": "Data Scientist"
+    },
+    {
+      "name": "Luca Naso",
+      "affiliation": "Koexai Srl",
+      "role": "CEO and Founder"
+    }
+  ],
   "version": "1.0",
   "dates": {
-    "created": "2025-12-16",
-    "released": "2025-12-16",
-    "lastUpdated": "2025-12-16"
+    "created": "2025-12-22",
+    "released": "2025-12-22",
+    "lastUpdated": "2025-12-22"
   },
   "identifier": {
     "type": "filename",
@@ -64,7 +64,7 @@
       "CSV"
     ],
     "encoding": "UTF-8",
-    "conventions": "Columns: DETX (Detector X coordinate), DETY (Detector Y coordinate), PI (Pulse Invariant energy channel). DETX/DETY range: ~-17000 to +17000. PI range: ~300 to 12000.",
+    "conventions": "Columns: DETX (Detector X coordinate), DETY (Detector Y coordinate), PI (Pulse Invariant energy channel). DETX range: ~-16968 to 17239. DETY range: ~-17356 to 16940. PI range: ~300 to 11999.",
     "relationships": "Single table with 248,963 rows (events) and 4 columns (including index)."
   },
   "quality": {
@@ -72,8 +72,8 @@
     "metrics": {
       "samples": 248963,
       "columns": 3,
-      "spatial_range": "DETX/Y approx +/- 1.7e4",
-      "energy_range": "PI 300-12000"
+      "spatial_range": "DETX/Y approx [-16968, 17239] / [-17356, 16940]",
+      "energy_range": "PI 300-11999"
     },
     "usageGuidance": "Suitable for statistical studies of detector distribution or ML training."
   },

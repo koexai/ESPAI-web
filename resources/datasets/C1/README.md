@@ -4,23 +4,19 @@
 
 ## Summary
 
-This dataset contains approximately **249,000 synthetic X-ray photon events** generated using a **Kernel Density Estimation (KDE)** approach. Each row represents a single photon event on the detector, characterized by spatial coordinates (**DETX, DETY**) and energy (**PI**).
-
-The synthetic data was created to simulate the statistical distribution of background or source events for the **XMM-Newton MOS1 instrument** (or similar X-ray detectors), trained on observational event lists.
-
-The primary purpose is to provide high-quality synthetic event lists for **background modeling**, **instrument response simulation**, and **testing of machine learning algorithms** in high-energy astrophysics.
+This dataset contains 248,963 synthetic X-ray photon events generated using a Kernel Density Estimation (KDE) approach. The data simulates the distribution of events on an X-ray detector (XMM-Newton MOS1), characterized by spatial coordinates and energy channels. Each row represents a single photon event defined by detector coordinates (DETX, DETY) and Pulse Invariant (PI) energy values. This distribution is suitable for background modeling, instrument response simulation, or training machine learning algorithms in high-energy astrophysics.
 
 ---
 
 ## Contents
 
 ```text
-mos1_synthetic_dataset/
-├── README.md                           # This file
-├── metadata.json                       # Machine-readable metadata
-├── mos1_generated_distribution_KDE.csv # Main dataset (CSV format)
-└── supplementary/
-    └── distribution_plots.png          # Spatial and spectral density plots
+datasets/MOS1_KDE/
+├── mos1_generated_distribution_KDE.csv  # Synthetic event list (248,963 events)
+├── metadata.json                        # Machine-readable metadata
+├── provenance.md                        # Data generation methodology and provenance
+├── citation.txt                         # Citation information for dataset usage
+└── README.md                            # This file
 ```
 
 ---
@@ -44,9 +40,9 @@ mos1_synthetic_dataset/
 
 ## Coordinate Conventions
 
-* **DETX:** Detector X coordinate (approx. range: -17000 to +17000)
-* **DETY:** Detector Y coordinate (approx. range: -17000 to +17000)
-* **PI:** Pulse Invariant (energy channel, approx. range: 300 to 12000)
+* **DETX:** Detector X coordinate (approx. range: ~-16968 to 17239)
+* **DETY:** Detector Y coordinate (approx. range: -~-17356 to 16940)
+* **PI:** Pulse Invariant (energy channel, approx. range: 300 to 11999)
 
 ---
 
@@ -182,3 +178,5 @@ For bug reports, please provide:
 * Steps to reproduce
 * Expected vs. actual behavior
 * System information (OS, Python version, etc.)
+
+
