@@ -43,7 +43,11 @@ X-band telescopes">
                 <h1>ESPAI</h1>
                 <div class="subtitle">Enhancing Signal Purity with Artificial Intelligence in X-band telescopes</div>
                 <div class="tagline">
-                    ESPAI is a machine learning framework that enhances the signal purity of X-ray observations. It uses Artificial Intelligence both to generate synthetic flare datasets and to automatically classify events in XMM-Newton's contaminated segments (Bad Time Intervals). It provides open, scalable tools designed for the era of Big Data in astronomy.</div>
+                    ESPAI is a machine-learning framework that enhances the signal purity of X-ray
+observations. It uses Artificial Intelligence to generate synthetic solar-flare datasets
+and to automatically classify events in XMM-Newton observations contaminated by
+solar flares (Bad Time Intervals). Built to be open and scalable, ESPAI is designed
+for the Big Data era in astronomy</div>
 
                 <div class="funding-notice">
                     ESPAI has been selected and funded under the ICSC – Centro Nazionale di Ricerca in HPC, Big Data e Quantum Computing, as part of the PNRR, and supported by the European Union – NextGenerationEU.
@@ -62,25 +66,28 @@ X-band telescopes">
                   This website introduces the ESPAI project — what it is, what it does, and why it matters.
                   You’ll also find access to the project’s main outputs, from datasets and AI models to
                   source code and publications. Explore our resources to dive into cutting-edge tools
-                  for celestial disturbances classification and synthetic data generation.
+                  for classification and generation of solar-flare datasets.
                 </p>
                 <p style="text-align: justify; font-size: 1.1rem; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
                   Everything is open and accessible. See the <a href="#outputs">Outputs section below</a> to learn more, or <a href="/resources/">open the ESPAI Resource Hub</a> to access the project resources. If you’d like to download datasets or code,
                   we’ll just ask you to fill out a short form with your affiliation and intended use.
-                </p>
+                <!--</p>
                 <p style="text-align: justify; font-size: 1.1rem; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
                     <a href="#" aria-label="Related work and collaborations">Find collaborations and related work</a> with references and external links.
-                </p>
+                </p>-->
 
                 <div class="grid">
                   <div class="card">
                     <h3>Discover the Project</h3>
-                    <p>Learn in detail about ESPAI, its scientific goals, and the motivation behind using Artificial Intelligence to remove solar flare from XMM-Newton observations. Understand how the project combines astrophysical models with advanced machine learning techniques to create new opportunities for research and discovery.</p>
+                    <p>Learn in detail about ESPAI, its scientific goals, and the motivation behind using Artificial Intelligence (AI) to remove solar-flare contaminations from XMM-Newton observations. Explore ESPAI’s scientific goals and the motivation behind using AI to mitigate solar-
+flare contamination from XMM-Newton observations. Understand how the project
+combines astrophysical models with advanced machine learning techniques to
+recover data that would otherwise be discarded.</p>
                     <a href="#project" class="btn">Learn More</a>
                   </div>
                   <div class="card">
                     <h3>Access Resources</h3>
-                    <p>Browse a growing collection of datasets, source code, and publications as they are released. These resources are designed to support both the astrophysics and AI communities, offering practical tools for analysis, experimentation, and reproducible science.</p>
+                    <p>Browse a growing collection of datasets, source code, plots and documentation. These resources are designed to support both the astrophysics and AI communities, offering practical tools for analysis, experimentation, and reproducible science.</p>
                     <a href="#outputs" class="btn">Explore</a>
                   </div>
                   <div class="card">
@@ -98,33 +105,52 @@ X-band telescopes">
             <div class="container">
                 <h2>About the ESPAI Project</h2>
                 <p style="text-align:justify; font-size:1.1rem; margin-bottom:2.5rem; max-width:900px; margin-left:auto; margin-right:auto;">
-                  The ESPAI project leverages advanced machine learning algorithms to increase signal purity within X-band radio astronomy. The project's primary objective is to develop an autonomous framework capable of mitigating celestial interference found in observational data of XMM-Newton radiotelescope. By refining the filtering mechanisms used to clean these observations, ESPAI intends to minimize data loss during analyses and significantly elevate the precision of subsequent scientific analyses.
+                  The ESPAI project leverages advanced machine-learning methods to improve the
+signal purity of XMM-Newton X-ray observations, focusing specifically on data from
+the EPIC cameras. Its primary objective is to develop an autonomous framework that
+can identify and mitigate solar-flare contamination, improving data quality while
+reducing the amount of scientifically useful data that is discarded during filtering.
                 </p>
                 <p style="text-align:justify; font-size:1.1rem; margin-bottom:2.5rem; max-width:900px; margin-left:auto; margin-right:auto;">
-                  To address these challenges, ESPAI integrates Generative AI to produce a large dataset of synthetic solar flare events. A classification system is developed to identify and remove solar flare from X-band telescope signals, with the potential for real-time implementation to reduce data storage requirements.
+                  To tackle this, ESPAI builds a binary, photon-level classifier that labels each
+detected event as either “flare” or “signal.” The classifier’s output is then used to
+isolate high-confidence solar-flare photons, which serve as the seed for a generative
+AI model that produces a large sample of “pure” solar-flare events. This synthetic but
+physically grounded dataset is designed to support detailed studies of this key
+source of background in X-ray observations, while also enabling more targeted
+mitigation in EPIC data processing.
                 </p>
                 <p style="text-align:justify; font-size:1.1rem; margin-bottom:3rem; max-width:900px; margin-left:auto; margin-right:auto;">
-                  The project delivers openly accessible tools: curated datasets, generative frameworks and source code repositories, all provided under transparent licensing terms. In this way, ESPAI contributes to reproducible science and accelerates discovery for both the astrophysics and AI communities.
+                  The project delivers openly accessible tools: curated datasets, generative
+frameworks and source code repositories, all provided under transparent licensing
+terms. In this way, ESPAI contributes to reproducible science and accelerates
+discovery for both the astrophysics and AI communities.
                 </p>
 
                 <div class="grid">
                     <div class="card">
-                        <h3>🧠 AI for Celestial disturbances</h3>
-                        <p>Development of an innovative Generative AI framework to generate a large dataset of celestial signals free from disturbances, which will subsequently be shared with the international scientific community.</p>
+                        <h3>🧠 AI for Solar Flare Modelling </h3>
+                        <p>Development of a generative AI framework that produces high-purity synthetic solar-
+flare events from classifier-selected flare photons, enabling detailed flare studies,
+benchmarking, and downstream model development.</p>
                     </div>
                     <div class="card">
-                        <h3>🔍 Anomaly Detection System</h3>
-                        <p>Design of a cutting-edge Machine Learning model, utilizing Anomaly Detection techniques, for identifying and removing celestial disturbances from astronomical signals.</p>
+                        <h3>🔍 Advanced Classification System</h3>
+                        <p>Photon-level solar-flare vs signal classification to support more targeted filtering and
+automated EPIC data processing at scale.</p>
                     </div>
                 </div>
 
                 <h3 style="text-align:justify; margin-top:3rem;">Project outputs</h3>
                 <ul class="feature-list">
                     <li>
-                        <strong>Synthetic datasets</strong>: High-fidelity event sequences generated from optimized Variational Autoencoder (VAE) models. Each sample includes relevant photon properties (energy, position) and metadata, derived from XMM-Newton observations, providing a realistic and reliable resource for astrophysical studies and model training.
+                        <strong>Synthetic datasets</strong>: High-fidelity event sequences generated from optimised Variational Autoencoder (VAE) models. Each sample includes relevant photon properties (energy, position) and metadata, derived from XMM-Newton observations, providing a realistic and reliable resource for astrophysical studies and model training.
                     </li>
                     <li>
-                        <strong>Inference and classification tools</strong>: Multi-Layer Perceptron (MLP) classifiers that distinguish solar flare photons from signal photons within Bad Time Intervals (BTIs). They are robust to data degradation (e.g., cheesing holes, dead columns) and utilize advanced feature engineering like spatial and spatio-temporal photon density.
+                        <strong>Inference and classification tools</strong>: Multi-Layer Perceptron (MLP) classifiers that distinguish solar-flare photons from the
+others within Bad Time Intervals (BTIs). They are robust to data degradation (e.g.
+dead columns/rows/pixels, “cheesing holes”) and utilise advanced feature
+engineering like spatial and spatio-temporal photon density.
                     </li>
                     <!-- <li><strong>Reproducible source code</strong> with documentation and examples under clear licensing terms.</li> -->
                     <!-- <li><strong>Citation and licensing guidance</strong> enabling responsible and ethical reuse.</li> -->
@@ -139,17 +165,20 @@ X-band telescopes">
                   <div class="card">
                     <h3>Methodology at a glance</h3>
                     <p>
-                      A unified pipeline links (i) data pre-processing using XMM-Scientific Analysis System (SAS), including cheesing task to remove astrophysical sources, (ii) controlled synthetic data generation via VAEs, and (iii) robust classification of disturbances using MLPs with data augmentation. The workflow supports observation-based inference constraints and scales to handle the large Blank Sky dataset.
+                      A unified pipeline links (i) data pre-processing using XMM-Scientific Analysis System
+(SAS), including cheesing task to remove astrophysical sources, (ii) robust
+classification of solar-flares using MLPs with data augmentation, and (iii) controlled
+synthetic data generation via VAEs. The workflow supports observation-based inference constraints and scales to handle the large Blank Sky dataset.
                     </p>
                   </div>
                 </div>
 
                 <div style="margin-top:2.5rem;">
-                  <h3 style="text-align:center;">Ownership, scientific referee, collaborations</h3> <!--& funding-->
+                  <h3 style="text-align:center;">Ownership, scientific advisor, collaborations</h3> <!--& funding-->
                   <p style="text-align:justify; font-size:1.05rem; max-width:900px; margin:0.75rem auto 1.5rem auto;">
                    ESPAI is conceived and developed under the leadership of <strong>Koexai S.r.l.</strong>, which coordinates all project activities and ensures their delivery. 
                    The project benefits from the valuable scientific input of <strong>Prof. Pasquale Mazzotta</strong> at the University of Rome Tor Vergata, 
-                   who contribute expertise in Observational Cosmology and Galaxy Clusters and act as scientific referees, nominated by <strong>INAF</strong> (Spoke 3 leader).
+                   who contribute expertise in Observational Cosmology and Galaxy Clusters and act as scientific advisor, nominated by <strong>INAF</strong> (Spoke 3 leader).
                   </p>
                   <p class="funding-notice" style="text-align:justify; margin-bottom:1rem;">
                     ESPAI has been selected and funded under the ICSC – Centro Nazionale di Ricerca in HPC, Big Data e Quantum Computing, as part of the PNRR, and supported by the European Union – NextGenerationEU.
@@ -171,7 +200,7 @@ X-band telescopes">
           <div class="container">
             <h2>Outputs</h2>
             <p class="lead" style="text-align:justify;max-width:820px;margin:0 auto 1.5rem;">
-              Explore ESPAI’s outputs: datasets, source code, publications, diagrams, and findings.
+              Explore ESPAI’s outputs: datasets, source code, plots and documentation.
                 For downloads and full details, open the <a href="/resources/">Resource Hub</a>.
 
               <!--  Each dataset offers an <strong>open sample (.csv)</strong> and <strong>open documentation</strong>.
@@ -182,13 +211,13 @@ X-band telescopes">
 
           
 
-              <!-- DATASET 1: Mos1 Synthethic Flare Observations -->
+              <!-- DATASET 1: Mos1 Synthetic Flare Observations -->
               <article class="card resource-card"
                        data-sample-url="./resources/datasets/samples/C1_sample.csv"
                        data-sample-size="~1 KB">
                 <header class="resource-head">
                   <h3>Synthetic EPIC-MOS1 Camera Flare events</h3>
-                  <p>Synthetic Solar Flare dataset generated with a Variational Auto Encoder generative model for EPIC-MOS1 camera of XMM-Newton radiotelescope.</p>
+                  <p>Synthetic Solar-Flare dataset generated with a VAE generative model for EPIC-MOS1 camera of XMM-Newton telescope.</p>
                   <ul class="meta">
                     <li><strong>Type:</strong> Dataset</li>
                     <li><strong>Version:</strong> 1.0</li>
@@ -211,13 +240,13 @@ X-band telescopes">
                 <div class="resource-foot muted">Last updated: 18/12/2025</div>
               </article>
 
-               <!-- DATASET 2: mos2 Synthethic Flare Observations -->
+               <!-- DATASET 2: mos2 Synthetic Flare Observations -->
               <article class="card resource-card"
                        data-sample-url="./resources/datasets/samples/C2_sample.csv"
                        data-sample-size="~1 KB">
                 <header class="resource-head">
                   <h3>Synthetic EPIC-MOS2 Camera Flare events</h3>
-                  <p>Synthetic Solar Flare dataset generated with a Variational Auto Encoder generative model for EPIC-MOS2 camera of XMM-Newton radiotelescope.</p>
+                  <p>Synthetic Solar-Flare dataset generated with a VAE generative model for EPIC-MOS2 camera of XMM-Newton telescope.</p>
                   <ul class="meta">
                     <li><strong>Type:</strong> Dataset</li>
                     <li><strong>Version:</strong> 1.0</li>
@@ -239,13 +268,13 @@ X-band telescopes">
                
                 <div class="resource-foot muted">Last updated: 18/12/2025</div>
               </article>
-               <!-- DATASET 3: Synthethic Flare Observations -->
+               <!-- DATASET 3: Synthetic Flare Observations -->
               <article class="card resource-card"
                        data-sample-url="./resources/datasets/sample/C3_sample"
                        data-sample-size="~1 KB">
                 <header class="resource-head">
-                  <h3>Synthetic EPIC-PN Camera Flare events</h3>
-                  <p>Synthetic Solar Flare dataset generated with a Variational Auto Encoder generative model for EPIC-PN camera of XMM-Newton radiotelescope.</p>
+                  <h3>Synthetic EPIC-pn Camera Flare events</h3>
+                  <p>Synthetic Solar-Flare dataset generated with a VAE generative model for EPIC-pn camera of XMM-Newton telescope.</p>
                   <ul class="meta">
                     <li><strong>Type:</strong> Dataset</li>
                     <li><strong>Version:</strong> 1.0</li>
@@ -295,10 +324,10 @@ X-band telescopes">
                     </div>
                     
                     <div class="contact-info" style="text-align: left;">
-                      <h3>Ownership &amp; Scientific Referees</h3>
+                      <h3>Ownership &amp; Scientific Advisors</h3>
                       <p><strong>Koexai S.r.l.</strong> — Project lead and coordinating body.</p>
-                      <p><strong>Pasquale Mazzotta</strong> (University of Rome Tor Vergata, Istituto Nazionale di Fisica Nucleare) — Scientific referee and contributor, nominated by <strong>INAF</strong> (Spoke 3 leader).</p>
-                      <p><strong>Federico De Luca</strong> (University of Rome Tor Vergata, Istituto Nazionale di Fisica Nucleare) — Ph.D. student in University of Rome Tor Vergata.</p>
+                      <p><strong>Pasquale Mazzotta</strong> (University of Rome Tor Vergata, Istituto Nazionale di Fisica Nucleare) — Scientific advisor and contributor, nominated by <strong>INAF</strong> (Spoke 3 leader).</p>
+                      <p><strong>Federico De Luca</strong> (University of Rome Tor Vergata, Istituto Nazionale di Fisica Nucleare) — Post Doc at University of Rome Tor Vergata.</p>
                     </div>
                 </div>
             </div>
