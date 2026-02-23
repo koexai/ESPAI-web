@@ -1,5 +1,5 @@
-column_name,dtype,description
-Unnamed: 0,int64,Row index
-DETX,float64,Detector X coordinate (MOS1 reference frame)
-DETY,float64,Detector Y coordinate (MOS1 reference frame)
-PI,float64,Pulse Invariant energy channel
+column_name,dtype,n_unique,min,max
+Unnamed: 0,int64,248963,0.0,248962.0
+DETX,float64,239072,-16968.001424117712,17238.99986691028
+DETY,float64,239173,-17355.998950131238,16939.93620279235
+PI,float64,126131,300.0010311040096,11999.000975203991

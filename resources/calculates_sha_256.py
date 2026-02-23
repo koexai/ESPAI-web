@@ -8,5 +8,5 @@ def sha256_file(filepath):
             hash_sha256.update(chunk)
     return hash_sha256.hexdigest()
 
-filepath = "datasets/C3/pn_generated_distribution_KDE.parquet"
+filepath = "/home/andrea/ESPAI-web/resources/datasets/C3/pn_generated_distribution_VAE.parquet"
 print(sha256_file(filepath))

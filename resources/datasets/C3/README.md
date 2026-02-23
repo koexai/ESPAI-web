@@ -1,184 +1,110 @@
-# PN Synthetic X-ray Event Distribution (KDE)
-
-**Version:** 1.0.0
+# ESPAI Synthetic EPIC-pn Camera Flare events (Version 1.0)
 
 ## Summary
+This dataset contains 1981559 synthetic records generated using a Variational Autoencoder (VAE) model. Each event is characterized by spatial coordinates (DETX/DETY) and the energetic parameter PI (Pulse Invariant). 
 
-This dataset contains approximately **249,000 synthetic X-ray photon events** generated using a **Kernel Density Estimation (KDE)** approach. Each row represents a single photon event on the detector, characterized by spatial coordinates (**DETX, DETY**) and energy (**PI**).
-
-The synthetic data was created to simulate the statistical distribution of background or source events for the **XMM-Newton PN instrument** (or similar X-ray detectors), trained on observational event lists.
-
-The primary purpose is to provide high-quality synthetic event lists for **background modeling**, **instrument response simulation**, and **testing of machine learning algorithms** in high-energy astrophysics.
-
----
+The primary purpose is generate realistic synthetic solar-flare events for training machine learning models, background subtraction, or instrument response simulation.
 
 ## Contents
-
-```text
-PN_synthetic_dataset/
-├── README.md                           # This file
-├── metadata.json                       # Machine-readable metadata
-├── pn_generated_distribution_KDE.csv # Main dataset (CSV format)
-└── supplementary/
-    └── distribution_plots.png          # Spatial and spectral density plots
 ```
-
----
-
+synthetic_pn_flare_events/
+├── pn_generated_distribution_VAE.parquet   # Main dataset (parquet format)
+├── metadata.json                           # Machine-readable metadata
+├── README.md                               # Project description and usage instructions
+├── dictionary.csv                          # Data dictionary
+├── provenance.md                           # Detailed generation methodology
+├── checksum.txt                            # SHA 256 code for dataset
+├── LICENSE_CC_BY_40.md                     # License information (CC BY 4.0)
+└── citation.txt                            # citations file 
+```
 ## Structure and Formats
 
 ### File Formats
-
-* **Primary:** CSV (Comma Separated Values)
-* **Encoding:** UTF-8
-* **Structure:** Tabular event list
+- **Primary**: parquet format
+- **Encoding**: UTF-8
 
 ### Data Organization
+- **Rows**: 1981559
+- **Columns**: 4
+- **Column naming**: ['Unnamed: 0', 'DETX', 'DETY', 'PI']
 
-* **Rows:** 248,963 synthetic X-ray events
-* **Columns:** 4 columns (Index + 3 physical properties)
-* **Column naming:** `Unnamed: 0` (Index), `DETX`, `DETY`, `PI`
-* **Total volume:** ~250k individual events
-
----
-
-## Coordinate Conventions
-
-* **DETX:** Detector X coordinate (approx. range: -17000 to +17000)
-* **DETY:** Detector Y coordinate (approx. range: -17000 to +17000)
-* **PI:** Pulse Invariant (energy channel, approx. range: 300 to 12000)
-
----
-
-## Missing Values
-
-* **Expected:** None (synthetic data is complete by design)
-* **Representation:** N/A
-
----
+### Missing Values
+- **Expected**: None (synthetic data is complete by design)
 
 ## Provenance and Methods
 
 ### Generation Pipeline Overview
-
-1. **Data Preprocessing** – Cleaning and normalization of real PN observational data.
-2. **Model Training** – Kernel Density Estimation (KDE) model fitted to the multidimensional space (spatial + spectral).
-3. **Sampling** – Random sampling from the estimated probability density function.
-4. **Post-processing** – Denormalization to physical units (DET coordinates and PI channels).
+1. **Variational Autoencoder (VAE)**: The system utilizes a Variational Autoencoder (VAE) to generate synthetic solar-flare events.
+2. **Latent Space** The process transforms raw data from the XMM-Newton observatory into probabilistic samples through a continuous latent space.
 
 ### Key Components
+- **Encoder-Decoder Architecture**: The model consists of linear layers with 16 hidden units and ReLU activations designed to map the input data into a Gaussian probability distribution.
+- **Reparameterization Trick**: This technique allows for differentiable sampling in the latent space through the equation:\[z = \mu + \epsilon \cdot \exp(0.5 \cdot \logvar)\]
+where:
+\[\epsilon \sim \mathcal{N}(0, I)\]
+- **Optimized ELBO Loss**: A specialized cost function that combines Kullback-Leibler (KL) divergence for regularization with Chamfer and Kolmogorov-Smirnov distances to better manage the stochastic nature of detected photons.
+- **Computing Infrastructure**: Model training was performed on the Leonardo supercomputer (Cineca) utilizing the Adam optimizer and an Early Stopping policy based on validation set performance.
 
-* **Statistical Model:** Kernel Density Estimator (Gaussian kernel)
-* **Bandwidth Selection:** Optimized for balance between smoothing and feature preservation
-* **Training Data:** Observational X-ray event lists
-* **Output:** Continuous distribution resampled into discrete events
+### Physical Parameters
+- **DETX and DETY**: Spatial detector coordinates used to precisely reconstruct the instrument's multi-modal geometry and structural voids.
+- **PI (Pulse Invariant)**: An energy parameter filtered by threshold and modeled to replicate instrumental peaks, specifically around 103 eV.
+- **Quantile Transformer**: A pre-processing method from scikit-learn used to rescale all features to ensure statistical uniformity before training.
 
----
-
-## Physical Parameters (Feature Space)
-
-The generation process models the joint probability distribution of three primary physical parameters:
-
-* **DETX:** Spatial position on the detector (X-axis)
-* **DETY:** Spatial position on the detector (Y-axis)
-* **PI:** Energy of the photon (Pulse Invariant channel)
-
-> **Note:** Unlike light curves, this dataset represents an integrated image/spectrum and does not currently include a time-of-arrival (`TIME`) column.
-
----
-
-## Software and Libraries
-
-* **Data Processing:** pandas, numpy
-* **Modeling:** scikit-learn (KDE implementation)
-* **Visualization:** matplotlib, seaborn
-
----
+### Software and Libraries
+- **Deep Learning**: PyTorch 2.0+
+- **Data Reduction and Analysis**: Science Analysis System (SAS)
+- **Data Processing**: pandas, numpy. scikit-learn
+- **Visualization**: matplotlib
 
 ## Quality and Limitations
 
 ### Validation and Quality Control
-
-* **Statistical Validation:** Generated distribution matches the underlying probability density of the training set.
-* **Range Consistency:** Generated events fall within valid physical detector coordinates and energy channels.
-* **Visual Inspection:** Spatial distribution accurately reproduces detector geometry and source/background morphology.
+- **Model Validation**: Qualitative visual analysis of marginal distributions confirms the successful replication of multi-modal spatial and energy profiles of the detector.
+- **Parameter Consistency**: Operational uniformity is ensured through fixed input/layer dimensions, Quantile Transformer rescaling, and an Early Stopping training policy.
+- **Statistical Validation**: Kolmogorov-Smirnov (KS) statistics and high p-values verify that the generated data achieves a successful "Match" with the target distributions.
 
 ### Dataset Statistics
-
-* **Total Samples:** 248,963 events
-* **Spatial Coverage:** Full Field of View (FOV)
-* **Spectral Range:** Broad energy coverage (soft to hard X-rays)
+- **Total Samples**: 
 
 ### Known Limitations
+1. **ELBO Loss Balancing**: The training process requires calibrating the β parameter to balance reconstruction precision with latent space regularity. This balance is essential for maintaining the internal coherence of the generative framework.
+2. **Focus on Generalization**: The model is designed to prioritize the reconstruction of the macroscopic architecture of distributions and generalization capabilities. Consequently, it places less emphasis on replicating specific point-wise statistical micro-fluctuations of the data.
+3. **Specialized Cost Function**: Due to the stochastic nature of detected photons, the model utilizes a specialized loss function integrating metrics such as Chamfer distance and KS distance. This personalization replaces standard metrics (like MSE or BCE) to better reflect global probability density.
 
-* **Smoothing:** KDE methods may smooth out extremely sharp features or point sources compared to raw data.
-* **Boundary Effects:** Edges of the detector (CCD gaps) may be slightly blurred depending on kernel bandwidth.
-* **Temporal Info:** No temporal evolution included (static snapshot of distribution).
-* **Instrumental Noise:** Does not simulate read-out noise or pile-up effects, only the distribution of recorded events.
-
----
-
-## Recommended Usage
-
-Suitable for:
-
-* Background subtraction modeling
-* Machine learning clustering and classification tests
-* Monte Carlo simulations of detector illumination
-* Statistical analysis of spatial/spectral correlations
-
----
+### Recommended Usage
+**Suitable for**:
+- data augmentation 
+- controlled experiments on cadence/noise
+- benchmarking generalisation
 
 ## How to Cite
 
 ### Plain Text Citation
-
-> Luca Naso et al. (2025). *PN Synthetic X-ray Event Distribution (KDE)* (Version 1.0.0).
-> Generated using Kernel Density Estimation.
+```
+ESPAI Project (2025). ESPAI Core (v1.0) — Generative models and classification tools.
+Source code. URL: https://ESPAI.koexai.com/resources/  Licence: MIT.
+```
 
 ### BibTeX Citation
 
 ```bibtex
-@dataset{luca2025pnkde,
-  author       = {Luca Naso et al.},
-  title        = {PN Synthetic X-ray Event Distribution (KDE)},
-  year         = {2025},
-  version      = {1.0.0},
-  note         = {Generated using Kernel Density Estimation},
-  howpublished = {Available at: [repository URL]}
-}
+@dataset{ESPAI_C_v0_1_2025,
+      author  = {Koexai Srl},
+      title   = {ESPAI Solar Flare — Synthetic Solar Flare Dataset},
+      year    = {2025},
+      version = {1.0},
+      url     = {https://ESPAI.koexai.com/resources/},
+      license = {CC BY 4.0},
+      note    = {}
+    }
 ```
-
----
 
 ## License and Contact
 
 ### License
-
-* **To be specified** (placeholder for `LICENSE` file)
+[CC BY 4.0]
 
 ### Contact Information
-
-* **Dataset Creator:** Luca Naso
-* **Institution:** Koexai Srl
-* **Email:** [luca@koexai.com](mailto:luca@koexai.com)
-* **Role:** Principal Investigator
-
----
-
-## Acknowledgments
-
-This dataset was generated using machine learning models trained on observational X-ray data. We acknowledge the high-energy astrophysics community for providing the foundational observations.
-
----
-
-## Support
-
-For questions about the dataset, methodology, or technical issues, please contact the dataset creator.
-
-For bug reports, please provide:
-
-* Clear description of the issue
-* Steps to reproduce
-* Expected vs. actual behavior
-* System information (OS, Python version, etc.)
+- **Project**: ESPAI (Koexai S.r.l.) [espai.koexai.com]
+- **Email**: [info@koexai.com]
+- **LinkedIn**:[https://www.linkedin.com/company/koexai/]

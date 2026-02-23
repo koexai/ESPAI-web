@@ -1,5 +1,5 @@
 {
-  "title": "MOS2 Synthetic X-ray Event Distribution (KDE)",
+  "title": "ESPAI Synthetic EPIC-MOS2 Camera Flare events",
   "creators": [
     {
       "name": "Stefano Calì",
@@ -34,29 +34,29 @@
     "lastUpdated": "2025-12-22"
   },
   "identifier": {
-    "type": "filename",
-    "value": "mos2_generated_distribution_KDE.csv"
+    "type": "internal",
+    "value": "mos2_generated_distribution_VAE.csv"
   },
   "citation": {
-    "text": "ESPAI MOS2 Synthetic X-ray Event Distribution (KDE) (Version 1.0). Generated using Kernel Density Estimation.",
-    "bibtex": "@dataset{ESPAI_C_v0_1_2025,\n  author={Koexai Srl},\n  title={ESPAI Solar Flare — Synthetic Solar Flare Dataset},\n  year={2025},\n  version={1.0},\n  note={Replace with DOI when available}\n}"
+    "text": "ESPAI Project (2025). ESPAI Solar Flare — Synthetic Solar Flare Dataset, v1.0. Koexai. URL: https://ESPAI.koexai.com/resources/  Licence: CC BY 4.0.",
+    "bibtex": "@dataset{ESPAI_C_v0_1_2025,author= {Koexai Srl}, title= {ESPAI Solar Flare — Synthetic Solar Flare Dataset}, year= {2025}, version= {1.0}, url= {https://ESPAI.koexai.com/resources/}, license= {CC BY 4.0}, note = {}"
   },
-  "abstract": "This dataset contains 420,773 synthetic X-ray photon events generated using a Kernel Density Estimation (KDE) approach. The data simulates the distribution of events on an X-ray detector (likely XMM-Newton MOS2), characterized by spatial coordinates and energy channels. Each row represents a single photon event with detector coordinates (DETX, DETY) and Pulse Invariant (PI) energy values. This distribution is suitable for background modeling, instrument simulation, or testing machine learning algorithms in high-energy astrophysics.",
+  "abstract": "This dataset contains 420,773 synthetic solar-flare events generated using a Variational Autoencoder (VAE) approach. The data simulates the distribution of events on an X-ray detector (likely XMM-Newton MOS2), characterized by spatial coordinates and energy channels. Each row represents a single photon event with detector coordinates (DETX, DETY) and Pulse Invariant (PI) energy values. This distribution is suitable for background modeling, instrument simulation, or testing machine learning algorithms in high-energy astrophysics.",
   "keywords": [
-    "X-ray astronomy",
+    "Solar-flare",
     "XMM-Newton",
     "MOS2",
-    "KDE",
+    "VAE",
     "synthetic data",
     "simulation",
     "background modeling",
     "astrophysics"
   ],
   "domain": "High Energy Astrophysics",
-  "purpose": "Generate realistic synthetic X-ray detector events for training machine learning models, background subtraction, or instrument response simulation.",
+  "purpose": "Generate realistic solar-flare events for training machine learning models, background subtraction, or instrument response simulation.",
   "provenance": {
-    "sources": "Generated via Kernel Density Estimation (KDE) trained on observational data (implied MOS2 event lists).",
-    "processing": "1) KDE model training on source distribution, 2) Resampling/Generation of 420,773 synthetic events.",
+    "sources": "Generated via Variational Autoencoder (VAE) trained on observational data (implied MOS2 event lists).",
+    "processing": "1) VAE model training with ELBO loss (combining Reconstruction, KS, and KL divergence), 2) Latent space sampling via reparameterization trick.",
     "derivations": "Synthetic event list containing DETX, DETY, and PI columns."
   },
   "structure": {
@@ -65,26 +65,26 @@
     ],
     "encoding": "UTF-8",
     "conventions": "Columns: DETX (Detector X coordinate), DETY (Detector Y coordinate), PI (Pulse Invariant energy channel). DETX range: ~-17019 to 17049. DETY range: ~-17343 to 16801. PI range: ~300 to 11999.",
-    "relationships": "Single table with 420,773 rows (events) and 3 data columns (plus index)."
+    "relationships": "Single table with 248,963 rows (events) and 4 columns (including index)."
   },
   "quality": {
-    "validation": "Statistical distribution matches the source KDE model.",
     "metrics": {
       "samples": 420773,
-      "columns": 3,
-      "spatial_range": "DETX: [-17019, 17049], DETY: [-17343, 16801]",
-      "energy_range": "PI: 300-11999"
+      "columns": 4,
+      "index_range": "0–420773",
+      "spatial_range": "DETX/Y approx [-17019, 17049] / [-17343, 16801]",
+      "energy_range": "PI 300-11999"
     },
     "usageGuidance": "Suitable for statistical studies of detector distribution or ML training."
   },
   "access": {
-    "licence": "To be specified",
+    "licence": "CC BY 4.0",
     "reuseGuidance": "Suitable for academic research and machine learning applications",
     "contact": {
       "name": "Luca Naso",
       "email": "luca@koexai.com",
       "role": "CEO and Founder"
     },
-    "projectLink": "N/A"
+    "projectLink": "https://espai.koexai.com/"
   }
 }

@@ -1,79 +1,81 @@
-# Provenance and Methods: Synthetic X-ray Telescope Event Dataset (ESPAI)
+# Provenance and Methods: ESPAI Synthetic EPIC-MOS2 Camera Flare events (Version 1.0)
+## Data Generation Overview
+This document provides a comprehensive description of the development and characterization of the optimized generative AI model within the ESPAI project. The methodology utilizes a Variational Autoencoder (VAE) to generate synthetic solar-flare events.
 
-## Overview
-
-This document provides a comprehensive description of how the synthetic X-ray telescope event dataset was generated within the ESPAI project (Enhancing Signal Purity with Artificial Intelligence in X-band telescopes). While the project explored various architectures, the final dataset described here was produced using a **Kernel Density Estimator (KDE)** model. The goal is to generate a balanced dataset of instrumental background signals and transient phenomena (such as Solar Flares) to support astronomical research.
-
-## Data Sources and Acquisition
+## 1. Acquisition Sources
 
 ### Primary Training Data
+**Source**: XMM-Newton Space Observatory
+* **Target Data**: Observations from the EPIC-MOS2 detector.
+* **Content**: Single photon events characterized by high instrumental quality.
+* **Key Features**: DETX (spatial), DETY (spatial), and PI (Pulse Invariant/Energy).
 
-**Source**: Observations from **XMM-Newton** (detectors MOS1, MOS2, PN).
-- **Content**: Real X-ray events specifically filtered to isolate high-energy instrumental background and solar flares.
-- **Structure**: Point clouds where each event represents a single photon defined by spatial coordinates and energy.
-- **Features**: 3-dimensional data points: `x = [DETX, DETY, PI]`.
-  - **DETX, DETY**: Spatial coordinates on the detector.
-  - **PI**: Pulse Invariant (Energy).
-- **Temporal sampling**: The methodology treats photons as independent instances (triples of DETX, DETY, PI); the temporal occurrence is considered decoupled from physical properties for this generation task.
+**Data Preprocessing**:
+* **Filtering**: Application of astronomical filters to isolate instrumental events and solar flares.
+* **Pulse Invariant (PI)**: Selection of events exceeding a specific threshold value.
+* **Normalization**: Features are rescaled using the Quantile Transformer from scikit-learn to ensure uniformity.
 
-**Data Preprocessing**: 
-- **Filtering**:
-  - Removal of instrumental noise and events outside the Field of View (FOV).
-  - **Energy Threshold**: `PI > 300` (approx. 300 eV) to isolate high-energy non-cosmic components typical of flares/background.
-  - **Quality Flags**: Usage of `FLAG` and `PATTERN` filters to select events of good instrumental quality.
-- **Normalization**: 
-  - Features (DETX, DETY, PI) are standardized using **Scikit-Learn's StandardScaler**.
-  - This ensures uniformity and compatibility with machine learning input ranges.
+## 2. Processing Pipeline
 
-## Generation Pipeline
+### Step 1: Variational Autoencoder (VAE) Architecture
+The optimized model is implemented in PyTorch and replaces the standard point-mapping of an Autoencoder with a probabilistic approach to the latent space.
 
-### Model Architecture: Kernel Density Estimator (KDE)
+**Encoder Structure**:
+* **Input Layer**: Dimension of 3 (DETX, DETY, PI).
+* **Hidden Layer**: Single hidden layer with a fixed size of 16 units (`hidden_dim = 16`).
+* **Output**: Maps input to two vectors: mean (μ) and log-variance (logvar) of a Gaussian distribution.
+* **Activation**: ReLU function is used for internal layers.
 
-The synthetic dataset was generated using a **Kernel Density Estimator (KDE)** implemented via `scikit-learn`, serving as a robust probabilistic approach.
+### Step 2: Latent Space and Reparameterization
+To allow backpropagation during training, the model employs the reparameterization trick:
+* **Sampling**: z = μ + ε · exp(0.5 · logvar), where ε ~ N(0, I).
+* **Purpose**: This creates a continuous and differentiable latent space, enabling the generation of new, physically plausible samples through interpolation.
 
-**Methodology**:
-- **Core Concept**: The model estimates the non-parametric probability density function of the real dataset ($X$) by summing kernel functions centered on each data point.
-- **Sampling**: New synthetic data points ($\hat{x}$) are sampled from this estimated distribution, reflecting the statistical properties of the original input.
+### Step 3: Decoder and Reconstruction
+The Decoder reconstructs the original input features from the sampled latent vector z.
+* **Structure**: Mirror architecture to the Encoder using ReLU activations.
+* **Output Layer**: Utilizes a linear activation function to remap features back into the original starting space.
 
-**Key Hyperparameters**:
-- **Bandwidth**: Set to **0.001**.
-  - **Rationale**: This extremely small value was selected to represent the intrinsic structural error of the sensor.
-  - **Effect**: Unlike larger bandwidths that might smooth the distribution, this specific value forces the model to generate a distribution that remains extremely close to the true multi-dimensional data, ensuring the synthetic samples are statistically indistinguishable from the real ones.
+### Step 4: Training and Loss Optimization
+The model was trained on the **Leonardo supercomputer** (Cineca) using an 80/20 training/validation split.
 
-## Quality Assurance
+**Evidence Lower Bound (ELBO) Loss**:
+The core optimization lies in a custom ELBO function designed for the stochastic nature of photon detection:
+
+> **L = L_Recon + β · L_KL**
+
+* **L_Recon**: A combination of Chamfer distance and Kolmogorov-Smirnov (KS) distance calculated batch by batch.
+* **L_KL**: Standard Kullback-Leibler divergence for latent space regularization.
+* **β Parameter**: Controls the balance between reconstruction fidelity and latent space regularity.
+
+## 3. Quality Control and Validation
+
+### Model Validation
+| Variable | KS Statistic | P-value | Outcome |
+| :--- | :--- | :--- | :--- |
+| DETX / DETY / PI | 0.0023 - 0.0028 | 0.28 - 0.51 | ✓ Match |
 
 ### Statistical Validation
+* **P-values**: Both models produced synthetic samples statistically indistinguishable from real data (p-values > critical threshold).
+* **Spatial Fidelity**: Models accurately replicate the multi-modal profile and structural "voids" of the detector.
+* **Energy Profile**: The VAE successfully models the PI energy peak around 10^3 eV, demonstrating the effectiveness of the combined Chamfer/KS loss.
 
-The quality of the KDE-generated dataset was validated using the **Kolmogorov-Smirnov (KS)** test, comparing the synthetic distributions against the real data.
+## 4. Software and Dependencies
 
-**Results (Baseline KDE Model)**:
-- **DETX**: KS Stat `0.0010` | P-value `0.9998`
-- **DETY**: KS Stat `0.0017` | P-value `0.8861`
-- **PI**: KS Stat `0.0017` | P-value `0.8431`
+### Computational Resources
+* **Hardware**: Leonardo Supercomputer managed by the Cineca consortium.
+* **Framework**: PyTorch.
+* **Optimization**: Adam optimizer with an Early Stopping policy based on the best validation ELBO.
 
-**Interpretation**:
-- The exceptionally low KS statistics and high P-values ($>0.05$) confirm that the null hypothesis cannot be rejected.
-- This statistically validates that the distributions produced by the KDE model are **indistinguishable** from the reference real data, outperforming other tested architectures like the Autoencoder in terms of pure statistical fidelity.
+## 5. Usage Recommendations
 
-### Visual and Structural Validation
+### Limitations and Assumptions
+* **Data Scope**: The model is currently optimized for the EPIC-MOS2 detector instrumental background.
+* **Feature Constraints**: Training is currently limited to three primary features (DETX, DETY, PI) to define the input dimension.
+* **ELBO Loss Balancing**: The training process requires calibrating the β parameter to balance reconstruction precision with latent space regularity. This balance is essential for maintaining the internal coherence of the generative framework.
+* **Focus on Generalization**: The model is designed to prioritize the reconstruction of the macroscopic architecture of distributions and generalization capabilities. Consequently, it places less emphasis on replicating specific point-wise statistical micro-fluctuations of the data.
+* **Specialized Cost Function**: Due to the stochastic nature of detected photons, the model utilizes a specialized loss function integrating metrics such as Chamfer distance and KS distance. This personalization replaces standard metrics (like MSE or BCE) to better reflect global probability density.
 
-The validation process included several graphical checks to ensure physical consistency:
-- **Correlation Matrices**: Comparison of feature interdependencies (DETX, DETY, PI) between real and synthetic sets.
-- **Global Energy Distribution**: Verification of spectral shape (linear and log scales) to ensure the model learned the background energy profile.
-- **Spatial Coverage**:
-  - **Radial Histograms**: Comparison of radial distribution ($\sqrt{DETX^2 + DETY^2}$).
-  - **Spatial Scatter Plots**: 2D overlay of real vs. synthetic events to validate spatial fidelity across the detector surface.
-
-## Processing Environment
-
-### Computing Resources
-- **Hardware**: Validated and run on the **Leonardo supercomputer**, managed by the CINECA consortium.
-
-### Software Stack
-- **Library**: `scikit-learn` (specifically for `KernelDensity` and `StandardScaler`).
-
-## Limitations and Assumptions
-
-### Methodological Assumptions
-1. **Temporal Independence**: The model assumes that single photon events (DETX, DETY, PI) are independent instances in a 3D point cloud. The temporal sequence is not modeled explicitly as a time series (e.g., via RNNs) because the physical properties are considered decoupled from the timestamp for this specific simulation goal.
-2. **Bandwidth Sensitivity**: The success of this method relies heavily on the specific bandwidth (0.001). A larger bandwidth would result in an overly smoothed distribution that fails to capture the specific sensor noise characteristics.
+### Research Directions
+1. **Anomaly Detection**: Utilizing the VAE for advanced anomaly detection in X-ray observations.
+2. **Dataset Expansion**: Applying the optimized framework to other XMM-Newton instruments beyond MOS2.
