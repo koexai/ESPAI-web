@@ -1,18 +1,17 @@
-# Provenance and Methods: ESPAI Synthetic EPIC-MOS1 Camera Flare events (Version 1.0)
+# Provenance and Methods: ESPAI Synthetic EPIC-MOS1 Camera Solar-Flare events (Version 1.0)
 ## Data Generation Overview
 This document provides a comprehensive description of the development and characterization of the optimized generative AI model within the ESPAI project. The methodology utilizes a Variational Autoencoder (VAE) to generate synthetic solar-flare events.
 
 ## 1. Acquisition Sources
 
 ### Primary Training Data
-**Source**: XMM-Newton Space Observatory
-* **Target Data**: Observations from the EPIC-MOS1 detector.
+* **Source**: XMM-Newton Space Observatory
+* **Target Data**: Observations from the EPIC-MOS1 camera.
 * **Content**: Single photon events characterized by high instrumental quality.
-* **Key Features**: DETX (spatial), DETY (spatial), and PI (Pulse Invariant/Energy).
+* **Key Features**: DETX (spatial), DETY (spatial), and PI (Pulse Invariant, i.e. calibrated energy).
 
 **Data Preprocessing**:
-* **Filtering**: Application of astronomical filters to isolate instrumental events and solar flares.
-* **Pulse Invariant (PI)**: Selection of events exceeding a specific threshold value.
+* **Filtering**: Application of astronomical filters to reject solar flares (SAS espfilt task). Selection of photons with energy above 300 eV.
 * **Normalization**: Features are rescaled using the Quantile Transformer from scikit-learn to ensure uniformity.
 
 ## 2. Processing Pipeline
@@ -56,9 +55,9 @@ The core optimization lies in a custom ELBO function designed for the stochastic
 | DETX / DETY / PI | 0.0023 - 0.0028 | 0.28 - 0.51 | ✓ Match |
 
 ### Statistical Validation
-* **P-values**: Both models produced synthetic samples statistically indistinguishable from real data (p-values > critical threshold).
-* **Spatial Fidelity**: Models accurately replicate the multi-modal profile and structural "voids" of the detector.
-* **Energy Profile**: The VAE successfully models the PI energy peak around 10^3 eV, demonstrating the effectiveness of the combined Chamfer/KS loss.
+* **P-values**: This model produced synthetic samples statistically indistinguishable from real data (p-values > critical threshold).
+* **Spatial Fidelity**: The model accurately replicate the multi-modal profile and structural "voids" of the detector.
+* **Energy Profile**: The model successfully models the PI energy peak around 10^3 eV, demonstrating the effectiveness of the combined Chamfer/KS loss.
 
 ## 4. Software and Dependencies
 
@@ -78,4 +77,5 @@ The core optimization lies in a custom ELBO function designed for the stochastic
 
 ### Research Directions
 1. **Anomaly Detection**: Utilizing the VAE for advanced anomaly detection in X-ray observations.
-2. **Dataset Expansion**: Applying the optimized framework to other XMM-Newton instruments beyond MOS1.
+2. **Dataset Expansion**: Generate synthetic samples of solar-flare events.
+3. **Instrument Flexibility**: Applying the optimized framework to other similar X-ray telescopes.

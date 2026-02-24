@@ -3,7 +3,7 @@
 ## Summary
 This dataset contains 1981559 synthetic records generated using a Variational Autoencoder (VAE) model. Each event is characterized by spatial coordinates (DETX/DETY) and the energetic parameter PI (Pulse Invariant). 
 
-The primary purpose is generate realistic synthetic solar-flare events for training machine learning models, background subtraction, or instrument response simulation.
+The primary purpose is generate realistic synthetic solar-flare events for training machine learning models or background modeling.
 
 ## Contents
 ```
@@ -43,24 +43,27 @@ synthetic_pn_flare_events/
 where:
 \[\epsilon \sim \mathcal{N}(0, I)\]
 - **Optimized ELBO Loss**: A specialized cost function that combines Kullback-Leibler (KL) divergence for regularization with Chamfer and Kolmogorov-Smirnov distances to better manage the stochastic nature of detected photons.
-- **Computing Infrastructure**: Model training was performed on the Leonardo supercomputer (Cineca) utilizing the Adam optimizer and an Early Stopping policy based on validation set performance.
+- **Computing Infrastructure**: Model training was performed on the Leonardo supercomputer (Cineca). 
+- **Training Strategy**: Utilize the Adam optimizer and an Early Stopping policy based on validation set performance.
 
 ### Physical Parameters
-- **DETX and DETY**: Spatial detector coordinates used to precisely reconstruct the instrument's multi-modal geometry and structural voids.
-- **PI (Pulse Invariant)**: An energy parameter filtered by threshold and modeled to replicate instrumental peaks, specifically around 103 eV.
-- **Quantile Transformer**: A pre-processing method from scikit-learn used to rescale all features to ensure statistical uniformity before training.
+- **DETX and DETY**: Spatial detector coordinates.
+- **PI (Pulse Invariant)**: Energy of reconstructed event.
 
 ### Software and Libraries
-- **Deep Learning**: PyTorch 2.0+
-- **Data Reduction and Analysis**: Science Analysis System (SAS)
-- **Data Processing**: pandas, numpy. scikit-learn
-- **Visualization**: matplotlib
 
+- **Data Reduction and Analysis**: Science Analysis System (SAS)
+- **Deep Learning**: PyTorch 2.0+ (torch)
+- **Data Processing**: pandas, numpy, h5py
+- **Scientific Computing & Statistics**: scipy, scikit-learn
+- **Astronomical Data I/O**: astropy (FITS/Table)
+- **Visualization**: matplotlib, seaborn
+- **Image Processing**: opencv-python (cv2)
+- **Execution Environment (Leonardo Supercomputer - Cineca)**: SLURM (sbatch, srun) + CUDA/GPU
 ## Quality and Limitations
 
 ### Validation and Quality Control
-- **Model Validation**: Qualitative visual analysis of marginal distributions confirms the successful replication of multi-modal spatial and energy profiles of the detector.
-- **Parameter Consistency**: Operational uniformity is ensured through fixed input/layer dimensions, Quantile Transformer rescaling, and an Early Stopping training policy.
+- **Distribution Comparison**: Qualitative visual analysis through comparison of the spatial and energy distributions of input and output VAE datasets.
 - **Statistical Validation**: Kolmogorov-Smirnov (KS) statistics and high p-values verify that the generated data achieves a successful "Match" with the target distributions.
 
 ### Dataset Statistics
@@ -73,9 +76,8 @@ where:
 
 ### Recommended Usage
 **Suitable for**:
-- data augmentation 
-- controlled experiments on cadence/noise
-- benchmarking generalisation
+- solar-flare background modeling
+- training machine learning algorithms
 
 ## How to Cite
 

@@ -1,4 +1,4 @@
-# ESPAI Synthetic EPIC-MOS1 Camera Flare events (Version 1.0)
+# ESPAI Synthetic EPIC-MOS1 Camera Solar-Flare events (Version 1.0)
 
 ## Summary
 This dataset contains 248963 synthetic solar-flare events generated using a Variational Autoencoder (VAE) model. Each event is characterized by spatial coordinates (DETX/DETY) and the energetic parameter PI (Pulse Invariant). 
@@ -43,12 +43,12 @@ synthetic_mos1_flare_events/
 where:
 \[\epsilon \sim \mathcal{N}(0, I)\]
 - **Optimized ELBO Loss**: A specialized cost function that combines Kullback-Leibler (KL) divergence for regularization with Chamfer and Kolmogorov-Smirnov distances to better manage the stochastic nature of detected photons.
-- **Computing Infrastructure**: Model training was performed on the Leonardo supercomputer (Cineca) utilizing the Adam optimizer and an Early Stopping policy based on validation set performance.
+- **Computing Infrastructure**: Model training was performed on the Leonardo supercomputer (Cineca). 
+- **Training Strategy**: Utilize the Adam optimizer and an Early Stopping policy based on validation set performance.
 
 ### Physical Parameters
 - **DETX and DETY**: Spatial detector coordinates.
 - **PI (Pulse Invariant)**: Energy of reconstructed event.
-- **Quantile Transformer**: A pre-processing method from scikit-learn used to rescale all features to ensure statistical uniformity before training.
 
 ### Software and Libraries
 
@@ -59,12 +59,11 @@ where:
 - **Astronomical Data I/O**: astropy (FITS/Table)
 - **Visualization**: matplotlib, seaborn
 - **Image Processing**: opencv-python (cv2)
-- **Execution Environment (HPC, opzionale ma previsto dagli script)**: SLURM (sbatch, srun) + ambiente CUDA/GPU 
+- **Execution Environment (Leonardo Supercomputer - Cineca)**: SLURM (sbatch, srun) + CUDA/GPU 
 ## Quality and Limitations
 
 ### Validation and Quality Control
-- **Model Validation**: Qualitative visual analysis of marginal distributions confirms the successful replication of multi-modal spatial and energy profiles of the detector.
-- **Parameter Consistency**: Operational uniformity is ensured through fixed input/layer dimensions, Quantile Transformer rescaling, and an Early Stopping training policy.
+- **Distribution Comparison**: Qualitative visual analysis through comparison of the spatial and energy distributions of input and output VAE datasets.
 - **Statistical Validation**: Kolmogorov-Smirnov (KS) statistics and high p-values verify that the generated data achieves a successful "Match" with the target distributions.
 
 ### Dataset Statistics
@@ -77,9 +76,8 @@ where:
 
 ### Recommended Usage
 **Suitable for**:
-- data augmentation 
-- controlled experiments on cadence/noise
-- benchmarking generalisation
+- solar-flare background modeling
+- training machine learning algorithms
 
 ## How to Cite
 

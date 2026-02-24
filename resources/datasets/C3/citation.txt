@@ -1,0 +1,21 @@
+If you use ESPAI in your research, please cite both the dataset and software:
+
+@dataset{ESPAI_C_v0_1_2025,
+      author  = {Koexai Srl},
+      title   = {ESPAI Solar Flare — Synthetic Solar Flare Dataset},
+      year    = {2025},
+      version = {1.0},
+      url     = {https://ESPAI.koexai.com/resources/},
+      license = {CC BY 4.0},
+      note    = {}
+    }
+
+@software{ESPAI_core_v0_1_2025,
+      author  = {Koexai},
+      title   = {ESPAI Core},
+      year    = {2025},
+      version = {1.0},
+      url     = {https://ESPAI.koexai.com/resources/},
+      license = {MIT},
+      note    = {}
+    }

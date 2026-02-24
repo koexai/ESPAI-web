@@ -1,5 +1,5 @@
 {
-  "title": "ESPAI Synthetic EPIC-MOS2 Camera Flare events",
+  "title": "ESPAI Synthetic EPIC-MOS2 Camera Solar-Flare events (Version 1.0)",
   "creators": [
     {
       "name": "Stefano Calì",
@@ -41,8 +41,9 @@
     "text": "ESPAI Project (2025). ESPAI Solar Flare — Synthetic Solar Flare Dataset, v1.0. Koexai. URL: https://ESPAI.koexai.com/resources/  Licence: CC BY 4.0.",
     "bibtex": "@dataset{ESPAI_C_v0_1_2025,author= {Koexai Srl}, title= {ESPAI Solar Flare — Synthetic Solar Flare Dataset}, year= {2025}, version= {1.0}, url= {https://ESPAI.koexai.com/resources/}, license= {CC BY 4.0}, note = {}"
   },
-  "abstract": "This dataset contains 420,773 synthetic solar-flare events generated using a Variational Autoencoder (VAE) approach. The data simulates the distribution of events on an X-ray detector (likely XMM-Newton MOS2), characterized by spatial coordinates and energy channels. Each row represents a single photon event with detector coordinates (DETX, DETY) and Pulse Invariant (PI) energy values. This distribution is suitable for background modeling, instrument simulation, or testing machine learning algorithms in high-energy astrophysics.",
+  "abstract": "This dataset contains 420,773 synthetic solar-flare events generated using a Variational Autoencoder (VAE) approach. The data simulates the distribution of events on an X-ray telescope (likely XMM-Newton MOS2), characterized by spatial coordinates and energy channels. Each row represents a single photon event with detector coordinates (DETX, DETY) and Pulse Invariant (PI) energy values. This distribution is suitable for background modeling, instrument simulation, or testing machine learning algorithms in high-energy astrophysics.",
   "keywords": [
+    "X-ray astronomy"
     "Solar-flare",
     "XMM-Newton",
     "MOS2",
